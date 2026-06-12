@@ -219,10 +219,13 @@ const Speaker = () => {
                   as silent salespersons.
                   <br />
                   <br /> Beyond the screen, my heart is in empowering others. I
-                  am the founder of Xelite (an exclusive community for the top
-                  1% of creatives),
-                  <span className="font-bold">CRESCEND</span> (the branding
-                  ecosystem designed for strategic brand growth), And the Uprix
+                  am the founder of <span className="font-bold">
+                    Xelite{" "}
+                  </span>{" "}
+                  (an exclusive community for the top 1% of creatives),
+                  <span className="font-bold"> Cresend </span> (the branding
+                  ecosystem designed for strategic brand growth), And the{" "}
+                  <span className="font-bold"> Uprix </span>
                   community (where our Uprizers build measurable consistency of
                   growth).
                   <br />

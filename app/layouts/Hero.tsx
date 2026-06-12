@@ -142,7 +142,7 @@ const Hero = () => {
         </h1>
         <h1
           ref={headlineRef}
-          className="md:hidden w-full tracking-wider mx-auto font-bold text-[40px] md:text-5xl md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
+          className="md:hidden w-full tracking-wider mx-auto font-bold text-[40px]/11 md:text-5xl md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
         >
           Purpose
           <br />
