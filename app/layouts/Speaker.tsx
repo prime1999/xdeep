@@ -220,8 +220,8 @@ const Speaker = () => {
                   <br />
                   <br /> Beyond the screen, my heart is in empowering others. I
                   am the founder of Xelite (an exclusive community for the top
-                  1% of creatives), the{" "}
-                  <span className="font-bold">CRESCEND</span> (branding
+                  1% of creatives),
+                  <span className="font-bold">CRESCEND</span> (the branding
                   ecosystem designed for strategic brand growth), And the Uprix
                   community (where our Uprizers build measurable consistency of
                   growth).

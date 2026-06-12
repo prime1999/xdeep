@@ -133,7 +133,7 @@ const Hero = () => {
         {/* Core Main Title */}
         <h1
           ref={headlineRef}
-          className="hidden md:block w-full tracking-tight mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
+          className="hidden md:block w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
         >
           Purpose Discovery
           <span className="text-white inline-block mt-2">
@@ -142,12 +142,12 @@ const Hero = () => {
         </h1>
         <h1
           ref={headlineRef}
-          className="md:hidden w-full tracking-tight mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
+          className="md:hidden w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
         >
           Purpose
           <br />
           Discovery
-          <span className="text-white inline-block mt-2">
+          <span className="text-2xl text-white inline-block mt-2">
             Figuring Out What You Are Actually Supposed To Do
           </span>{" "}
         </h1>

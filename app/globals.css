@@ -141,6 +141,7 @@
     background-attachment: fixed;
     color: #f3f4f6;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -161,6 +162,7 @@
       );
     background-size: 56px 56px;
     background-position: center top;
+    overflow-x: hidden;
   }
 
   h1,
