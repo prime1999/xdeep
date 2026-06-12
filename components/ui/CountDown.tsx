@@ -66,12 +66,12 @@ const CountDown = () => {
   }
 
   return (
-    <div className="w-full max-w-xl mx-auto bg-[#09090e]/60 border border-white/[0.04] rounded-2xl p-6 backdrop-blur-md shadow-xl text-center space-y-4">
+    <div className="w-full max-w-xl mx-auto bg-[#09090e]/60 border border-white/[0.04] rounded-2xl p-2 backdrop-blur-md shadow-xl text-center space-y-4">
       {/* Countdown Grid Blocks */}
-      <div className="grid grid-cols-4 gap-3 font-heading text-white">
+      <div className="w-full mx-auto grid grid-cols-4 gap-2 font-heading text-white">
         {/* Days */}
         <div className="bg-white/[0.02] border border-white/[0.03] p-3 rounded-xl text-white/[0.8]">
-          <div className="text-2xl sm:text-3xl font-bold tracking-tight text-indigo-400">
+          <div className="text-2xl text-center sm:text-3xl font-bold tracking-tight text-indigo-400">
             {formatNumber(timeLeft.days)}
           </div>
           <p className="text-[10px] uppercase tracking-wider text-gray-500 font-medium mt-1">

@@ -61,10 +61,10 @@ const Speaker = () => {
                 {/* Translucent overlay label */}
                 <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-2xl border border-white/5 p-4">
                   <h6 className="text-sm font-bold text-white tracking-wide">
-                    Taipaq
+                    Taifaq
                   </h6>
                   <p className="text-[11px] text-indigo-300 tracking-wider uppercase font-semibold">
-                    FOUNDER, Taipaq Piexels
+                    FOUNDER, Taifaq Piexels
                   </p>
                 </div>
               </div>

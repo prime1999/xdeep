@@ -97,9 +97,9 @@ const Focus = () => {
             discussions that will genuinely shift your mindset and give you
             peace of mind."
           </p>
-          <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 font-mono uppercase tracking-wider">
+          <div className="flex flex-col items-center justify-center gap-1.5 text-xs text-gray-500 font-mono uppercase tracking-wider">
             <span>UPRIX CREATIVE DIRECTIVES</span>
-            <span>•</span>
+
             <span className="text-indigo-400">EVOLVE UPWARD FORUM</span>
           </div>
         </div>

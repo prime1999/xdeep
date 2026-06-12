@@ -32,48 +32,56 @@ const Schedule = () => {
   const calendarRef = useRef<HTMLDivElement>(null);
   const floatersRef = useRef<HTMLDivElement>(null);
 
+  // FIXED: Declared missing animation refs
+  const textRef = useRef<HTMLSpanElement>(null);
+  const actionsWrapperRef = useRef<HTMLDivElement>(null);
+
   const questions = [
     "Is this really what I am supposed to be doing?",
     "Am I choosing the wrong path and wasting time?",
     "Why does it feel like I'm falling behind immediately?",
   ];
 
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
   const [showAdjacentLinks, setShowAdjacentLinks] = useState(false);
 
-  // Character-by-character typing speed
+  // Pure GSAP Infinite Character Typing Loop Setup
   useEffect(() => {
-    let text = questions[currentWordIndex];
-    let currentCharIndex = 0;
-    setShowAdjacentLinks(false);
-    setDisplayedText("");
+    if (!textRef.current) return;
 
-    const typingInterval = setInterval(() => {
-      setDisplayedText((prev) => prev + text.charAt(currentCharIndex));
-      currentCharIndex++;
+    const masterTl = gsap.timeline({ repeat: -1 });
 
-      if (currentCharIndex >= text.length) {
-        clearInterval(typingInterval);
+    questions.forEach((question) => {
+      const questionTl = gsap.timeline({
+        onStart: () => {
+          setShowAdjacentLinks(false);
+          if (textRef.current) textRef.current.textContent = "";
+        },
+      });
 
-        // Once typing sequence ends, trigger GSAP smooth slide-in entry for links
-        setTimeout(() => {
+      questionTl
+        // 1. Fluidly type out sentence directly on the DOM node node
+        .to(textRef.current, {
+          duration: question.length * 0.035, // Balanced highly-readable pace
+          text: question,
+          ease: "none",
+        })
+        // 2. Fire action menu triggers exactly on finish string sequence
+        .call(() => {
           setShowAdjacentLinks(true);
-        }, 300);
+        })
+        // 3. Keep text locked static for 5 seconds for clear reading window
+        .to({}, { duration: 5 });
 
-        // Leave it on screen for 5 seconds before changing questions
-        setTimeout(() => {
-          setCurrentWordIndex((prev) => (prev + 1) % questions.length);
-        }, 5000);
-      }
-    }, 45); // highly readable typing speed
+      masterTl.add(questionTl);
+    });
 
-    return () => clearInterval(typingInterval);
-  }, [currentWordIndex]);
+    return () => {
+      masterTl.kill();
+    };
+  }, []);
 
-  // GSAP animation on component mount
+  // Structural Entrance Animations
   useEffect(() => {
-    // Elegant fade in and slight offset glide for elements
     const tl = gsap.timeline();
 
     tl.fromTo(
@@ -89,7 +97,6 @@ const Schedule = () => {
       "-=0.6",
     );
 
-    // Bounce effect for floaters
     const floaters = floatersRef.current?.querySelectorAll(".floating-badge");
     if (floaters) {
       tl.fromTo(
@@ -106,7 +113,6 @@ const Schedule = () => {
         "-=0.4",
       );
 
-      // Infinitely float slightly
       gsap.to(floaters, {
         y: -6,
         duration: 2.5,
@@ -118,17 +124,17 @@ const Schedule = () => {
     }
   }, []);
 
-  // GSAP reaction when adjacent links display state toggle
+  // Smooth Slide-In Reactions for action layout buttons
   useEffect(() => {
-    if (showAdjacentLinks && linksContainerRef.current) {
+    if (showAdjacentLinks && actionsWrapperRef.current) {
       gsap.fromTo(
-        linksContainerRef.current.children,
-        { opacity: 0, y: 10 },
+        actionsWrapperRef.current.children,
+        { opacity: 0, x: -8 },
         {
           opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
+          x: 0,
+          duration: 0.4,
+          stagger: 0.08,
           ease: "power2.out",
           overwrite: "auto",
         },
@@ -136,11 +142,7 @@ const Schedule = () => {
     }
   }, [showAdjacentLinks]);
 
-  // Calendar parameters for June 2026
-  // Starts on a Monday
   const daysInJune = 30;
-  const startingEmptySlots = 0; // June 1st, 2026 is Monday, so 0 slots index
-
   const daysOfWeek = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
   return (
@@ -149,12 +151,10 @@ const Schedule = () => {
         id="showcase-dashboard"
         className="relative mx-auto mt-12 w-full lg:w-8/12 px-2 lg:mt-12"
       >
-        {/* Glow Behind matching design theme properties */}
         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Main glass card wrapper with Frosted Glass theme aesthetics */}
         <div className="relative rounded-3xl border border-white/10 bg-[#09090e] p-6 backdrop-blur-xl shadow-2xl shadow-indigo-500/5">
-          {/* Top Control Bar styled with bg-white/[0.02] */}
+          {/* Top Control Bar */}
           <div className="mb-6 flex items-center justify-between border-b border-white/5 bg-white/[0.02] -mx-6 -mt-6 px-6 py-4">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-red-500" />
@@ -170,7 +170,7 @@ const Schedule = () => {
             </div>
           </div>
 
-          {/* Floating Integrations / Badges */}
+          {/* Floating Badges */}
           <div
             ref={floatersRef}
             className="pointer-events-none absolute inset-x-0 -top-6 flex justify-between px-4"
@@ -180,16 +180,14 @@ const Schedule = () => {
               <span>Live Stream Grid</span>
               <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
             </div>
-
             <div className="floating-badge pointer-events-auto flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3.5 py-1.5 text-xs text-indigo-200 shadow-lg shadow-black/40 backdrop-blur-md">
               <Layers className="h-3.5 w-3.5 text-indigo-400" />
               <span>Diagnostic Logs</span>
             </div>
           </div>
 
-          {/* Dashboard Panels */}
           <div className="grid grid-cols-1 gap-5 md:grid-cols-5">
-            {/* Left panel: June Calendar (2 cols) styled matches bg-black/40 */}
+            {/* Left panel: June Calendar */}
             <div
               ref={calendarRef}
               className="rounded-2xl border border-white/5 bg-black/40 p-4 md:col-span-2"
@@ -199,16 +197,15 @@ const Schedule = () => {
                   June 2026
                 </span>
                 <div className="flex gap-1">
-                  <div className="w-4 h-4 bg-white/5 rounded flex items-center justify-center text-[8px] text-gray-400">
+                  <div className="w-4 h-4 bg-white/5 rounded flex items-center justify-center text-[8px] text-gray-400 cursor-pointer">
                     &lt;
                   </div>
-                  <div className="w-4 h-4 bg-white/5 rounded flex items-center justify-center text-[8px] text-gray-400">
+                  <div className="w-4 h-4 bg-white/5 rounded flex items-center justify-center text-[8px] text-gray-400 cursor-pointer">
                     &gt;
                   </div>
                 </div>
               </div>
 
-              {/* Calendar Days Tracker */}
               <div className="grid grid-cols-7 gap-1 text-center font-mono">
                 {daysOfWeek.map((day) => (
                   <div
@@ -250,16 +247,14 @@ const Schedule = () => {
               <CountDown />
             </div>
 
-            {/* Right panel: Journal Logs + Live GSAP Typing (3 cols) */}
+            {/* Right panel: Journal Logs */}
             <div className="flex flex-col justify-between space-y-4 md:col-span-3">
-              {/* Journal log layout matching design exactly */}
               <div className="space-y-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4">
                 <div className="flex items-center gap-1.5 font-mono text-xs text-gray-500">
                   <FileText className="h-3 w-3" />
                   <span>PERSONAL JOURNAL LOGS</span>
                 </div>
 
-                {/* Day 1 Log: June 26 matching Pre-Event Log design layout */}
                 <div className="flex gap-4">
                   <div className="text-xs font-mono text-gray-500 shrink-0">
                     26 JUN
@@ -277,7 +272,6 @@ const Schedule = () => {
                   </div>
                 </div>
 
-                {/* Day 2 Log: June 27 styled beautifully to stand out */}
                 <div className="flex gap-4">
                   <div className="text-xs font-mono text-indigo-400 shrink-0">
                     27 JUN
@@ -294,7 +288,7 @@ const Schedule = () => {
                 </div>
               </div>
 
-              {/* Typing interactive diagnostic section */}
+              {/* Typing Interactive Scanner Section */}
               <div
                 ref={terminalRef}
                 className="rounded-2xl border border-white/5 bg-black/40 p-4 font-mono text-xs"
@@ -306,22 +300,28 @@ const Schedule = () => {
                   <span className="flex h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
                 </div>
 
-                {/* Question container */}
+                {/* FIXED: Replaced standard React text output tracking with an empty ref target container for GSAP */}
                 <div className="min-h-[50px] relative">
                   <HelpCircle className="absolute left-0 top-0.5 h-4 w-4 text-indigo-400" />
                   <p className="pl-6 text-[11px] leading-relaxed text-gray-300">
-                    <span>"{displayedText}"</span>
+                    <span
+                      ref={textRef}
+                      className="text-gray-200 font-medium"
+                    ></span>
                     <span className="inline-block h-3.5 w-1.5 rounded-xs translate-y-0.5 bg-indigo-400 ml-1 animate-pulse" />
                   </p>
                 </div>
 
-                {/* Smooth slide-in link buttons container once typing finishes */}
+                {/* Action Buttons Link Wrapper */}
                 <div
                   ref={linksContainerRef}
-                  className="mt-3.5 flex flex-wrap gap-2 border-t border-white/5 pt-3 transition-all"
+                  className="mt-3.5 border-t border-white/5 pt-3"
                 >
                   {showAdjacentLinks ? (
-                    <>
+                    <div
+                      ref={actionsWrapperRef}
+                      className="flex flex-wrap gap-2 transition-all"
+                    >
                       <span className="text-[9px] uppercase tracking-wider text-gray-600 py-1 pr-1">
                         Actions:
                       </span>
@@ -338,7 +338,7 @@ const Schedule = () => {
                       >
                         <span>View Roadmap</span>
                       </a>
-                    </>
+                    </div>
                   ) : (
                     <span className="text-[9px] text-gray-600 italic">
                       Synthesizing diagnostics...
@@ -349,7 +349,7 @@ const Schedule = () => {
             </div>
           </div>
 
-          {/* Floating Overlay Card matching the design perfectly */}
+          {/* Floating Overlay Badge */}
           <div className="absolute bottom-8 right-[-14px] w-32 bg-white/10 backdrop-blur-md border border-white/15 p-3 rounded-xl shadow-xl transform rotate-3 z-20 pointer-events-auto shadow-black/50">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-emerald-500 rounded-full border border-emerald-400 animate-pulse"></div>
@@ -362,17 +362,15 @@ const Schedule = () => {
             </div>
           </div>
 
-          {/* Bottom micro indicator */}
           <div className="mt-4 flex items-center justify-between text-[10px] text-white/[0.8] font-semibold border-t border-white/5 pt-4">
             <span>HOSTED STREAM ON GOOGLE MEET</span>
-            <span>LATENCY: 0.0s SECURE STREAM</span>
           </div>
         </div>
       </div>
       <Link
         href="https://wa.link/8yf5wm"
         target="blank"
-        className="w-full md:w-1/4 lg:w-1/6 mt-4 mx-auto flex items-center justify-center gap-1 text-xs bg-primary-blue text-white duration-500 transition hover:bg-primary-blue/80 text-white font-semibold py-2 px-4 cursor-pointer"
+        className="w-11/12 md:w-1/4 lg:w-1/6 mt-4 mx-auto flex items-center justify-center gap-1 text-xs bg-primary-blue text-white duration-500 transition hover:bg-primary-blue/80 font-semibold py-2 px-4 cursor-pointer"
       >
         Register <ChevronsRight className="mt-1" size={15} />
       </Link>
