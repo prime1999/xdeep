@@ -25,7 +25,8 @@ const Speaker = () => {
   const credentials = [
     "Brand Identity Designer",
     "Founder, Xelite",
-    "Founder, Cresend and Uprix",
+    "Founder, Cresend",
+    "Founder, Uprix",
     "English Lit Scholar",
     "Visual Storyteller",
   ];
@@ -175,7 +176,7 @@ const Speaker = () => {
                     Taifaq
                   </h6>
                   <p className="text-[11px] text-indigo-300 tracking-wider uppercase font-semibold">
-                    FOUNDER, Taifaq Pixels
+                    FOUNDER, Uprix
                   </p>
                 </div>
               </div>
@@ -220,16 +221,16 @@ const Speaker = () => {
                   <br /> Beyond the screen, my heart is in empowering others. I
                   am the founder of Xelite (an exclusive community for the top
                   1% of creatives), the{" "}
-                  <span className="font-bold">CRESCEND</span> branding ecosystem
-                  (designed for strategic brand growth),
+                  <span className="font-bold">CRESCEND</span> (branding
+                  ecosystem designed for strategic brand growth), And the Uprix
+                  community (where our Uprizers build measurable consistency of
+                  growth).
                   <br />
-                  <br /> And the Uprix community (where our Uprizers build
-                  measurable consistency of growth). Right now, my focus is
-                  locked on X-Deep. With this June edition centered entirely on
-                  purpose, I am here to provide practical solutions. If you are
-                  seeking clarity or trying to align your work with a deeper
-                  mission, I am ready to help you find that alignment and make
-                  this a transformative experience.
+                  <br /> Right now, my focus is locked on X-Deep. With this June
+                  edition centered entirely on purpose, I am here to provide
+                  practical solutions. If you are seeking clarity or trying to
+                  align your work with a deeper mission, I am ready to help you
+                  find that alignment and make this a transformative experience.
                 </p>
               </div>
 
