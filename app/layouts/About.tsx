@@ -1,7 +1,23 @@
+"use client";
+
+// react-imports
+import { useEffect, useRef } from "react";
 // icons-imports
 import { AlertCircle, ShieldAlert } from "lucide-react";
+// gsap-imports
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const About = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
+
   const painPoints = [
     {
       stage: "In School",
@@ -20,16 +36,72 @@ const About = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    // Master Scroll timeline block setup
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%", // Starts animation when top of the section hits 75% depth of user screen
+        toggleActions: "play none none none",
+      },
+      defaults: { ease: "power3.out" },
+    });
+
+    // 1. Reveal main header text group
+    if (headerRef.current) {
+      tl.fromTo(
+        headerRef.current.children,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 },
+      );
+    }
+
+    // 2. Animate Left Sidebar blocks (Slide up and layout pop)
+    if (leftColRef.current) {
+      tl.fromTo(
+        leftColRef.current.children,
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 },
+        "-=0.5", // overlap with header sequence finishing
+      );
+    }
+
+    // 3. Stagger-reveal Stage card array on the right side panel
+    if (rightColRef.current) {
+      tl.fromTo(
+        rightColRef.current.children,
+        { opacity: 0, x: 20, y: 10 },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.18,
+          ease: "power2.out",
+        },
+        "-=0.6",
+      );
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="the-reality"
       className="w-10/12 mx-auto relative py-20 overflow-hidden"
     >
       {/* Background glow for ambient contrast */}
       <div className="absolute -bottom-24 left-10 w-[350px] h-[350px] rounded-full bg-indigo-500/5 blur-3xl pointer-events-none" />
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="max-w-3xl space-y-4">
+        <div ref={headerRef} className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-indigo-400">
             <AlertCircle className="h-3.5 w-3.5" />
             <span className="font-semibold">The Reality Audit</span>
@@ -48,7 +120,7 @@ const About = () => {
         {/* Core Paragraph Copy Grid */}
         <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Main textual narrative */}
-          <div className="lg:col-span-6 space-y-6">
+          <div ref={leftColRef} className="lg:col-span-6 space-y-6">
             {/* Design theme highlight block with Indigo left-bar indicator */}
             <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl backdrop-blur-sm relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
@@ -81,7 +153,10 @@ const About = () => {
           </div>
 
           {/* Cards for transition states with frosted layouts */}
-          <div className="lg:col-span-6 flex flex-col justify-between gap-4">
+          <div
+            ref={rightColRef}
+            className="lg:col-span-6 flex flex-col justify-between gap-4"
+          >
             {painPoints.map((point) => (
               <div
                 key={point.stage}
