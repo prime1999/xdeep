@@ -136,7 +136,7 @@ const Hero = () => {
           className="hidden md:block w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
         >
           Purpose Discovery
-          <span className="text-white tracking-tight inline-block mt-2">
+          <span className="text-white tracking-tight inline-block mt-4">
             Figuring Out What You Are Actually Supposed To Do
           </span>{" "}
         </h1>
@@ -147,7 +147,7 @@ const Hero = () => {
           Purpose
           <br />
           Discovery
-          <span className="text-2xl tracking-tight text-white inline-block mt-2">
+          <span className="text-2xl tracking-tight text-white inline-block mt-4">
             Figuring Out What You Are Actually Supposed To Do
           </span>{" "}
         </h1>
