@@ -1,6 +1,7 @@
 // icons-imports
 import { Target } from "lucide-react";
 import { Sparkles, Video, ChevronsRight } from "lucide-react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -29,9 +30,13 @@ const Hero = () => {
           Confused about which path to take? Join us for an honest breakdown of
           how to discover your purpose and, more importantly, how to execute it.
         </p>
-        <button className="flex items-center gap-1 text-xs bg-primary-blue text-white duration-500 transition hover:bg-primary-blue/80 text-white font-semibold py-2 px-4 rounded-full cursor-pointer mt-6">
+        <Link
+          href="https://wa.link/8yf5wm"
+          target="blank"
+          className="flex items-center gap-1 text-xs bg-primary-blue text-white duration-500 transition hover:bg-primary-blue/80 text-white font-semibold py-2 px-4 rounded-full cursor-pointer mt-6"
+        >
           Register <ChevronsRight className="mt-1" size={15} />
-        </button>
+        </Link>
         <div className="flex items-center gap-4 mt-2">
           <div className="flex -space-x-3">
             <div className="w-9 h-9 rounded-full border-2 border-[#030712] bg-indigo-950 flex items-center justify-center text-[10px] font-bold text-indigo-300">
