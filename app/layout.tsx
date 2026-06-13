@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Lato } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+// google analytics imports
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-heading",
@@ -54,6 +56,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${lato.variable} ${myCustomFont.variable} ${myDeepFont.variable}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
     </html>
   );
 }

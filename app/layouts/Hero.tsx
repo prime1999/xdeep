@@ -4,6 +4,8 @@
 import { useEffect, useRef } from "react";
 // next-imports
 import Link from "next/link";
+// Google analytics imports
+import { sendGAEvent } from "@next/third-parties/google";
 // icons-imports
 import { Target, Sparkles, Video, ChevronsRight } from "lucide-react";
 // gsap-imports
@@ -165,10 +167,16 @@ const Hero = () => {
         <div ref={ctaRef}>
           <Link
             href="https://wa.link/8yf5wm"
-            target="blank"
+            target="_blank"
+            onClick={() => {
+              sendGAEvent("event", "register_click", {
+                link_url: "https://wa.link/8yf5wm",
+                source: "hero_section",
+              });
+            }}
             className="flex items-center gap-1 text-xs bg-primary-blue text-white duration-300 transition-all hover:bg-primary-blue/80 font-semibold py-2.5 px-6 rounded-full cursor-pointer mt-6 shadow-lg shadow-primary-blue/20 active:scale-95"
           >
-            Register{" "}
+            Register
             <ChevronsRight
               className="mt-0.5 group-hover:translate-x-0.5 transition-transform"
               size={15}

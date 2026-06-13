@@ -4,6 +4,8 @@
 import { useEffect, useRef } from "react";
 // next-imports
 import Link from "next/link";
+// Google analytics imports
+import { sendGAEvent } from "@next/third-parties/google";
 // icons-imports
 import { ChevronsRight } from "lucide-react";
 import {
@@ -200,7 +202,13 @@ const Audience = () => {
         <div ref={ctaRef} className="flex justify-center mt-6">
           <Link
             href="https://wa.link/8yf5wm"
-            target="blank"
+            target="_blank"
+            onClick={() => {
+              sendGAEvent("event", "register_click", {
+                link_url: "https://wa.link/8yf5wm",
+                source: "audience_section",
+              });
+            }}
             className="w-full md:w-1/4 lg:w-1/6 flex items-center justify-center gap-1 text-xs bg-primary-blue text-white duration-300 transition-all hover:bg-primary-blue/80 font-semibold py-2.5 px-4 cursor-pointer rounded-full shadow-lg shadow-primary-blue/10 active:scale-95"
           >
             Register <ChevronsRight className="mt-0.5" size={15} />

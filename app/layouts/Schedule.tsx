@@ -4,6 +4,8 @@
 import { useEffect, useRef, useState } from "react";
 // next-imports
 import Link from "next/link";
+// Google analytics imports
+import { sendGAEvent } from "@next/third-parties/google";
 // icons-imports
 import { ChevronsRight } from "lucide-react";
 import {
@@ -370,6 +372,12 @@ const Schedule = () => {
       <Link
         href="https://wa.link/8yf5wm"
         target="blank"
+        onClick={() => {
+          sendGAEvent("event", "register_click", {
+            link_url: "https://wa.link/8yf5wm",
+            source: "schedule_section",
+          });
+        }}
         className="w-11/12 md:w-1/4 lg:w-1/6 mt-4 mx-auto flex items-center justify-center gap-1 text-xs bg-primary-blue text-white rounded-full duration-500 transition hover:bg-primary-blue/80 font-semibold py-2 px-4 cursor-pointer"
       >
         Register <ChevronsRight className="mt-1" size={15} />
