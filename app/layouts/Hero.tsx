@@ -10,6 +10,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import { Target, Sparkles, Video, ChevronsRight } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
+import RegisterLink from "@/components/RegisterLink";
 
 const Hero = () => {
   // Animation Container References
@@ -164,24 +165,8 @@ const Hero = () => {
         </p>
 
         {/* Action Registration Button */}
-        <div ref={ctaRef}>
-          <Link
-            href="https://wa.link/8yf5wm"
-            target="_blank"
-            onClick={() => {
-              sendGAEvent("event", "register_click", {
-                link_url: "https://wa.link/8yf5wm",
-                source: "hero_section",
-              });
-            }}
-            className="flex items-center gap-1 text-xs bg-primary-blue text-white duration-300 transition-all hover:bg-primary-blue/80 font-semibold py-2.5 px-6 rounded-full cursor-pointer mt-6 shadow-lg shadow-primary-blue/20 active:scale-95"
-          >
-            Register
-            <ChevronsRight
-              className="mt-0.5 group-hover:translate-x-0.5 transition-transform"
-              size={15}
-            />
-          </Link>
+        <div ref={ctaRef} className="mt-6">
+          <RegisterLink source={"hero"} />
         </div>
 
         {/* Social Proof Engagement Section */}

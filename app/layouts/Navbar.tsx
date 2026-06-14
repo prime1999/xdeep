@@ -1,12 +1,12 @@
 // next-imports
 import Link from "next/link";
 import Image from "next/image";
-// Google analytics imports
-import { sendGAEvent } from "@next/third-parties/google";
+
 // icons-imports
 import { ChevronsRight } from "lucide-react";
 // images-imports
 import logo from "@/public/images/logo.png";
+import RegisterLink from "@/components/RegisterLink";
 
 const Navbar = () => {
   return (
@@ -77,19 +77,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link
-          href="https://wa.link/8yf5wm"
-          target="_blank"
-          onClick={() => {
-            sendGAEvent("event", "register_click", {
-              link_url: "https://wa.link/8yf5wm",
-              source: "navbar",
-            });
-          }}
-          className="flex items-center gap-1 text-xs bg-primary-blue text-white duration-500 transition hover:bg-primary-blue/80 font-semibold py-2 px-4 rounded-full cursor-pointer"
-        >
-          Register <ChevronsRight className="mt-1" size={15} />
-        </Link>
+        <RegisterLink source={"navbar"} />
       </div>
     </nav>
   );

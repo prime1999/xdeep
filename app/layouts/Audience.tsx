@@ -18,6 +18,7 @@ import {
 // gsap-imports
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RegisterLink from "@/components/RegisterLink";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -200,19 +201,7 @@ const Audience = () => {
 
         {/* Action Link Target */}
         <div ref={ctaRef} className="flex justify-center mt-6">
-          <Link
-            href="https://wa.link/8yf5wm"
-            target="_blank"
-            onClick={() => {
-              sendGAEvent("event", "register_click", {
-                link_url: "https://wa.link/8yf5wm",
-                source: "audience_section",
-              });
-            }}
-            className="w-full md:w-1/4 lg:w-1/6 flex items-center justify-center gap-1 text-xs bg-primary-blue text-white duration-300 transition-all hover:bg-primary-blue/80 font-semibold py-2.5 px-4 cursor-pointer rounded-full shadow-lg shadow-primary-blue/10 active:scale-95"
-          >
-            Register <ChevronsRight className="mt-0.5" size={15} />
-          </Link>
+          <RegisterLink source={"audience"} />
         </div>
       </div>
     </section>

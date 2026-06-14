@@ -22,6 +22,7 @@ import {
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import CountDown from "@/components/ui/CountDown";
+import RegisterLink from "@/components/RegisterLink";
 
 // Register the GSAP TextPlugin
 if (typeof window !== "undefined") {
@@ -369,19 +370,10 @@ const Schedule = () => {
           </div>
         </div>
       </div>
-      <Link
-        href="https://wa.link/8yf5wm"
-        target="blank"
-        onClick={() => {
-          sendGAEvent("event", "register_click", {
-            link_url: "https://wa.link/8yf5wm",
-            source: "schedule_section",
-          });
-        }}
-        className="w-11/12 md:w-1/4 lg:w-1/6 mt-4 mx-auto flex items-center justify-center gap-1 text-xs bg-primary-blue text-white rounded-full duration-500 transition hover:bg-primary-blue/80 font-semibold py-2 px-4 cursor-pointer"
-      >
-        Register <ChevronsRight className="mt-1" size={15} />
-      </Link>
+      <div className="w-3/12 lg:w-1/12 mt-4 mx-auto">
+        {" "}
+        <RegisterLink source={"schedule"} />
+      </div>
     </section>
   );
 };
