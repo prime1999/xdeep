@@ -4,6 +4,7 @@
 import { useEffect, useRef } from "react";
 // next-imports
 import Image from "next/image";
+import Link from "next/link";
 // icons-imports
 import { ArrowUp } from "lucide-react";
 import logo from "@/public/images/logo.png";
@@ -117,7 +118,18 @@ const Footer = () => {
           {/* Copyrights */}
           <div className="flex flex-col items-center sm:items-end justify-center text-center sm:text-right gap-0.5">
             <p>Copyright © 2026. All rights reserved.</p>
-            <p className="tracking-wider">developed by priime.</p>
+            <span className="flex items-center gap-1">
+              <p className="tracking-wider">developed by</p>
+
+              <Link
+                href="https://priime-portfolio.vercel.app/"
+                target="_blank"
+                className="underline tracking-wider duration-500 hover:text-white transition-colors"
+              >
+                priime
+              </Link>
+              <span className="tracking-wider">.</span>
+            </span>{" "}
           </div>
         </div>
       </div>
