@@ -1,7 +1,7 @@
 // layouts-imports
 import About from "./layouts/About";
 import Audience from "./layouts/Audience";
-import Focus from "./layouts/Focus";
+import Fix from "./layouts/Fix";
 import Footer from "./layouts/Footer";
 import Hero from "./layouts/Hero";
 import Navbar from "./layouts/Navbar";
@@ -14,7 +14,7 @@ const page = () => {
       <Navbar />
       <Hero />
       <About />
-      <Focus />
+      <Fix />
       <Audience />
       <Speaker />
       <Schedule />

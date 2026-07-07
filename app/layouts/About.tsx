@@ -3,7 +3,14 @@
 // react-imports
 import { useEffect, useRef } from "react";
 // icons-imports
-import { AlertCircle, ShieldAlert } from "lucide-react";
+import {
+  MessageCircle,
+  Brain,
+  CircleStop,
+  Ban,
+  Frown,
+  MessageSquareText,
+} from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,41 +22,49 @@ if (typeof window !== "undefined") {
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const leftColRef = useRef<HTMLDivElement>(null);
-  const rightColRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
 
-  const painPoints = [
+  const highlights = [
     {
-      stage: "In School",
-      text: "Balancing standard classes and memorizing theories while feeling the dread of selecting a major/career track without knowing who you are.",
-      badge: "Stage 01",
+      title: "The Spark",
+      desc: "You wake up with a brilliant idea. You get incredibly excited about a new skill, a personal brand layout, or a business concept. You tell yourself, 'This is the one.'",
+      icon: Brain,
+      color: "text-indigo-400",
     },
     {
-      stage: "Fresh Out of University",
-      text: "Holding a diploma and facing the immediate, crushing weight of the real world—trying to map directions under social pressure.",
-      badge: "Stage 02",
+      title: "The Freeze",
+      desc: "You open your laptop or phone to start. Suddenly, a wave of self-doubt hits you. You feel like you are not good enough yet, or you worry about what people will say if it fails.",
+      icon: CircleStop,
+      color: "text-red-500",
     },
     {
-      stage: "Navigating Adulthood",
-      text: "Working in a repetitive cycle, questioning your alignment, and fearing that choosing a different trajectory means starting from zero.",
-      badge: "Stage 03",
+      title: "The Delay",
+      desc: "You tell yourself you need to do more research first. You promise to start 'tomorrow' when you have more energy or better timing.",
+      icon: Ban,
+      color: "text-red-900",
+    },
+    {
+      title: "The Guilt",
+      desc: "Tomorrow comes, and you spend hours scrolling on social media instead. You go to bed feeling guilty, heavy, and frustrated that another day slipped away.",
+      icon: Frown,
+      color: "text-black",
     },
   ];
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    // Master Scroll timeline block setup
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 75%", // Starts animation when top of the section hits 75% depth of user screen
+        start: "top 75%", // Fires when the top of the section is 75% down the viewport
         toggleActions: "play none none none",
       },
       defaults: { ease: "power3.out" },
     });
 
-    // 1. Reveal main header text group
+    // 1. Title block fade and slide up
     if (headerRef.current) {
       tl.fromTo(
         headerRef.current.children,
@@ -58,30 +73,35 @@ const About = () => {
       );
     }
 
-    // 2. Animate Left Sidebar blocks (Slide up and layout pop)
-    if (leftColRef.current) {
+    // 2. 3-Card Grid staggered layout entrance
+    if (gridRef.current) {
       tl.fromTo(
-        leftColRef.current.children,
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 },
-        "-=0.5", // overlap with header sequence finishing
+        gridRef.current.children,
+        { opacity: 0, y: 30, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+        },
+        "-=0.5", // Overlap slightly with header animation
       );
     }
 
-    // 3. Stagger-reveal Stage card array on the right side panel
-    if (rightColRef.current) {
+    // 3. Premium Quote Box scaling pop
+    if (quoteRef.current) {
       tl.fromTo(
-        rightColRef.current.children,
-        { opacity: 0, x: 20, y: 10 },
+        quoteRef.current,
+        { opacity: 0, y: 25, scale: 0.98 },
         {
           opacity: 1,
-          x: 0,
           y: 0,
-          duration: 0.7,
-          stagger: 0.18,
-          ease: "power2.out",
+          scale: 1,
+          duration: 0.9,
+          ease: "back.out(1.1)",
         },
-        "-=0.6",
+        "-=0.4",
       );
     }
 
@@ -94,88 +114,77 @@ const About = () => {
     <section
       ref={sectionRef}
       id="the-reality"
-      className="w-10/12 mx-auto relative py-20 overflow-hidden"
+      className="relative py-20 overflow-hidden"
     >
-      {/* Background glow for ambient contrast */}
-      <div className="absolute -bottom-24 left-10 w-[350px] h-[350px] rounded-full bg-indigo-500/5 blur-3xl pointer-events-none" />
+      {/* Aurora spotlight */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Heading */}
-        <div ref={headerRef} className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-indigo-400">
-            <AlertCircle className="h-3.5 w-3.5" />
-            <span className="font-semibold">The Reality Audit</span>
+        {/* Title Group */}
+        <div
+          ref={headerRef}
+          className="mx-auto max-w-3xl text-center space-y-4"
+        >
+          <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
+            <MessageCircle className="h-3.5 w-3.5" />
+            <span className="font-semibold text-center">The Reality check</span>
           </div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white/[0.8] md:text-4xl">
-            Ever wake up wondering, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 to-purple-400">
-              "Is this really what I am supposed to be doing?"
-            </span>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-5xl">
+            The 72-Hour Cycle You Keep Repeating
           </h2>
-          <p className="text-lg text-indigo-300 font-medium">
-            You are definitely not alone.
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-400">
+            Let’s be honest about what happens every single week:
           </p>
         </div>
 
-        {/* Core Paragraph Copy Grid */}
-        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Main textual narrative */}
-          <div ref={leftColRef} className="lg:col-span-6 space-y-6">
-            {/* Design theme highlight block with Indigo left-bar indicator */}
-            <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl backdrop-blur-sm relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
-              <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-2">
-                Honest Reality Check
-              </h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Whether you are in school, fresh out of university, or just
-                trying to navigate adulthood, there is an unspoken pressure to
-                have your entire life figured out immediately. The constant fear
-                of choosing the wrong path, wasting time, or falling behind can
-                leave you feeling paralyzed and completely stuck.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/5 bg-red-950/10 p-5 space-y-3">
-              <div className="flex items-center gap-2 text-red-400">
-                <ShieldAlert className="h-5 w-5" />
-                <h4 className="font-semibold text-xs uppercase tracking-wider">
-                  The "Just follow your passion" Trap
-                </h4>
-              </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                We are tired of the generic, "just follow your passion"
-                motivational speeches. When you are confused, you do not need
-                hype. You need clarity, honest truths, and a practical roadmap
-                to figure out your next steps.
-              </p>
-            </div>
-          </div>
-
-          {/* Cards for transition states with frosted layouts */}
-          <div
-            ref={rightColRef}
-            className="lg:col-span-6 flex flex-col justify-between gap-4"
-          >
-            {painPoints.map((point) => (
+        {/* Feature Highlights Grid */}
+        <div
+          ref={gridRef}
+          className="w-11/12 mx-auto mt-16 grid grid-cols-1 gap-6 md:grid-cols-4"
+        >
+          {highlights.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
               <div
-                key={point.stage}
-                className="group relative rounded-xl border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]"
+                key={item.title}
+                className="group relative rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xs p-6 space-y-4 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] flex flex-col justify-between"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-display font-bold text-white text-base group-hover:text-indigo-300 transition-colors">
-                    {point.stage}
-                  </h3>
-                  <span className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
-                    {point.badge}
+                {/* Background numbers indicator - Elegant translucent design style */}
+                <span className="absolute top-4 right-6 font-mono font-extrabold text-white/[0.03] text-5xl select-none leading-none z-0 transition-colors group-hover:text-white/[0.06]">
+                  {`0${idx + 1}`}
+                </span>
+
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <span
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ${item.color} shadow-sm border border-white/5 transition-transform duration-300 group-hover:scale-110`}
+                  >
+                    <IconComponent className="h-5 w-5" />
                   </span>
+
+                  {/* Title & Description */}
+                  <h3 className="font-display font-bold text-white text-lg mt-4 transition-colors group-hover:text-indigo-300">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 leading-relaxed mt-2">
+                    {item.desc}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {point.text}
-                </p>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+
+        {/* Highlight Quote Layout with premium frosted card styling */}
+        <div
+          ref={quoteRef}
+          className="mt-12 max-w-4xl mx-auto text-center space-y-4 relative shadow-2xl"
+        >
+          <div className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 rounded-full bg-indigo-500/5 blur-2xl" />
+          <p className="text-sm text-gray-200 leading-relaxed italic">
+            "This is not a discipline problem. It is an overthinking problem.
+            And it stops the moment you enter the room."
+          </p>
         </div>
       </div>
     </section>

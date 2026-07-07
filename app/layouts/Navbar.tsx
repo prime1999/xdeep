@@ -37,11 +37,11 @@ const Navbar = () => {
             </li>
             <li className="cursor-pointer hover:text-white transition-colors">
               <a
-                href="#the-focus"
+                href="#the-fix"
                 className="text-white/[0.8] hover:text-white transition-colors"
               >
                 {" "}
-                The Focus
+                The Fix
               </a>
             </li>
             <li className="cursor-pointer hover:text-white transition-colors">

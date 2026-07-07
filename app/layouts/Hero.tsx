@@ -162,7 +162,9 @@ const Hero = () => {
             Stop Planning. Start Xecuting.
           </span>{" "}
         </h1>
-        <p className="font-deep text-xs text-primary-yellow mb-2">THE </p>
+        <p className="md:hidden font-deep text-xs text-primary-yellow mb-2">
+          THE{" "}
+        </p>
         <h1
           ref={headlineRef}
           className="md:hidden w-full tracking-wider mx-auto font-bold text-[25px]/9 text-center text-primary-yellow space-y-2 font-embrace"
@@ -204,8 +206,8 @@ const Hero = () => {
             </div>
           </div>
           <p className="pl-4 text-xs text-gray-400 font-sans">
-            Join <span className="font-bold text-white">400+ others</span>{" "}
-            seeking their direction this month.
+            Join <span className="font-bold text-white">over hundreds</span> of
+            young creatives fighting the same battle this month.
           </p>
         </div>
 
