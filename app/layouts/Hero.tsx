@@ -2,15 +2,13 @@
 
 // react-imports
 import { useEffect, useRef } from "react";
-// next-imports
-import Link from "next/link";
-// Google analytics imports
-import { sendGAEvent } from "@next/third-parties/google";
 // icons-imports
-import { Target, Sparkles, Video, ChevronsRight } from "lucide-react";
+import { Target, Sparkles, Video } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
 import RegisterLink from "@/components/RegisterLink";
+import heroImage from "@/public/images/hero-image.png";
+import Navbar from "./Navbar";
 
 const Hero = () => {
   // Animation Container References
@@ -100,10 +98,15 @@ const Hero = () => {
   return (
     <main
       ref={containerRef}
+      style={{
+        backgroundImage: `url(${heroImage.src})`,
+        backgroundSize: "cover",
+      }}
       className="w-full flex items-center justify-center flex-col gap-2 min-h-[85vh] relative overflow-hidden"
     >
+      <Navbar />
       {/* Background glow matrix to fit the Uprix dark aesthetic */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-black rounded-full blur-[130px] pointer-events-none" />
 
       {/* Brand Identity Display Header */}
       <div
