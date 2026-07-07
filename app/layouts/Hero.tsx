@@ -2,13 +2,19 @@
 
 // react-imports
 import { useEffect, useRef } from "react";
+// next imports
+import Image from "next/image";
 // icons-imports
 import { Target, Sparkles, Video } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
+// button for analytics import
 import RegisterLink from "@/components/RegisterLink";
-import heroImage from "@/public/images/hero-image.png";
+// layout component imports
 import Navbar from "./Navbar";
+// images imports
+import heroImage from "@/public/images/hero-image.png";
+import clock from "@/public/images/clock.png";
 
 const Hero = () => {
   // Animation Container References
@@ -101,12 +107,19 @@ const Hero = () => {
       style={{
         backgroundImage: `url(${heroImage.src})`,
         backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "var(--hero-bg-mid)",
+        backgroundBlendMode: "overlay",
       }}
-      className="w-full flex items-center justify-center flex-col gap-2 min-h-[85vh] relative overflow-hidden"
+      className="w-full flex items-center justify-center flex-col gap-2 min-h-[90vh] relative overflow-hidden"
     >
-      <Navbar />
       {/* Background glow matrix to fit the Uprix dark aesthetic */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-black rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent to-[#020617]" />
+      {/* <div className="absolute top-[50px] right-[10px] opacity-20">
+        <Image src={clock} alt="Clock" width={700} height={700} />
+      </div> */}
 
       {/* Brand Identity Display Header */}
       <div
@@ -119,8 +132,8 @@ const Hero = () => {
             - deep
           </h6>
         </span>
-        <p className="text-[10px] uppercase font-mono tracking-widest text-indigo-400">
-          June Edition
+        <p className="text-[10px] uppercase font-mono tracking-widest text-primary-yellow">
+          July Edition
         </p>
       </div>
 
@@ -131,30 +144,32 @@ const Hero = () => {
       >
         <Target className="text-indigo-400 animate-pulse" size={13} />
         <h6 className="text-[11px] tracking-wide text-gray-300 font-sans">
-          Open to everyone • Hosted live on Google Meet
+          Open to everyone • Hosted live on uprix space
         </h6>
       </span>
 
       <div className="w-full flex items-center justify-center flex-col px-4 mt-4 relative z-10">
         {/* Core Main Title */}
+        <p className="hidden md:block font-deep text-xs text-primary-yellow mb-2">
+          THE{" "}
+        </p>
         <h1
           ref={headlineRef}
-          className="hidden md:block w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
+          className="hidden md:block w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-yellow space-y-2 font-embrace"
         >
-          Purpose Discovery
+          PROCASTNATION SOLUTION
           <span className="text-white tracking-tight inline-block mt-4">
-            Figuring Out What You Are Actually Supposed To Do
+            Stop Planning. Start Xecuting.
           </span>{" "}
         </h1>
+        <p className="font-deep text-xs text-primary-yellow mb-2">THE </p>
         <h1
           ref={headlineRef}
-          className="md:hidden w-full tracking-wider mx-auto font-bold text-[40px]/11 md:text-5xl md:w-10/12 lg:w-9/12 text-center text-primary-blue space-y-2 font-embrace"
+          className="md:hidden w-full tracking-wider mx-auto font-bold text-[25px]/9 text-center text-primary-yellow space-y-2 font-embrace"
         >
-          Purpose
-          <br />
-          Discovery
+          PROCASTNATION SOLUTION
           <span className="text-2xl tracking-tight text-white inline-block mt-4">
-            Figuring Out What You Are Actually Supposed To Do
+            Stop Planning. Start Xecuting.
           </span>{" "}
         </h1>
 
@@ -163,8 +178,8 @@ const Hero = () => {
           ref={subtextRef}
           className="md:w-8/12 lg:w-5/12 font-sans text-center text-sm/relaxed mt-5 text-gray-400"
         >
-          Confused about which path to take? Join us for an honest breakdown of
-          how to discover your purpose and, more importantly, how to execute it.
+          This is not a lecture; it is a raw, deep conversation designed to drag
+          you out of your head and push you into messy, profitable action.
         </p>
 
         {/* Action Registration Button */}
@@ -195,7 +210,7 @@ const Hero = () => {
         </div>
 
         {/* Features Meta Footnotes */}
-        <div
+        {/* <div
           ref={featuresRef}
           className="pt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 font-mono text-[11px] text-gray-500"
         >
@@ -207,7 +222,7 @@ const Hero = () => {
             <Sparkles className="h-3.5 w-3.5 text-indigo-500" />
             <span>Actionable Roadmaps</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

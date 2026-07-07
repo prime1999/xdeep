@@ -1,17 +1,13 @@
 // next-imports
-import Link from "next/link";
 import Image from "next/image";
-
-// icons-imports
-import { ChevronsRight } from "lucide-react";
 // images-imports
 import logo from "@/public/images/logo.png";
 import RegisterLink from "@/components/RegisterLink";
 
 const Navbar = () => {
   return (
-    <nav className="sticky top-3 z-50 w-10/12 md:w-9/12 rounded-[16px] mx-auto h-14 px-4 backdrop-blur-3xl border-b border-white/[0.06]">
-      <div className="w-full mx-auto flex items-center justify-between h-full">
+    <nav className="fixed top-3 left-0 right-0 z-50">
+      <div className="w-10/12 md:w-9/12 rounded-[16px] mx-auto h-14 px-4 backdrop-blur-3xl border-b border-white/[0.06] flex items-center justify-between">
         <Image
           src={logo}
           width={80}
