@@ -33,23 +33,20 @@ const Audience = () => {
 
   const users = [
     {
-      role: "Student",
-      desc: "Trying to balance your current studies while figuring out what you actually want your future to look like.",
-      scenario: "Academics without a personal blueprint",
+      role: "The Overloaded Student",
+      desc: "You are drowning in school assignments and exams, but you desperately want to build a skill or business on the side without crashing.",
       icon: GraduationCap,
       accent: "from-indigo-500/10 to-transparent border-indigo-950",
     },
     {
-      role: "Recent Graduate",
-      desc: "Feeling the heavy weight of the real world and looking for a clear direction on what to do next.",
-      scenario: "Navigating post-college choice paralysis",
+      role: "The Quiet Perfectionist",
+      desc: "You feel like you need one more course, one more video, or one more design before you are 'good enough' to put yourself out there.",
       icon: Briefcase,
       accent: "from-purple-500/10 to-transparent border-purple-950",
     },
     {
-      role: "Lifelong Learner",
-      desc: "Anyone, from any background, who is simply willing to learn, grow, and finally find clarity in their personal journey.",
-      scenario: "Evolving upward at any age or stage",
+      role: "The Inconsistent Builder",
+      desc: "You are tired of starting projects with massive energy in week one, only to watch them disappear by week three.",
       icon: BookOpen,
       accent: "from-amber-500/10 to-transparent border-amber-950",
     },
@@ -129,17 +126,14 @@ const Audience = () => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Intro Blocks */}
         <div ref={introRef} className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-indigo-400">
+          <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Target Profiles</span>
+            <span>Is this for you?</span>
           </div>
-          <h2 className="font-display text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            Is this session for you?
-          </h2>
-          <p className="text-base text-gray-400 leading-relaxed max-w-xl">
-            You do not need to have everything figured out to be here. In fact,
-            this session is perfectly crafted for you if you identify with any
-            of the following:
+
+          <p className="text-sm border-l-2 border-primary-blue pl-4 text-gray-400 leading-relaxed max-w-xl">
+            This X-Deep session isn't for people who want a hype-filled
+            motivational speech. It is explicitly crafted for:
           </p>
         </div>
 
@@ -163,9 +157,6 @@ const Audience = () => {
 
                   {/* Copy labels */}
                   <div>
-                    <span className="block font-mono text-[9px] text-[#818cf8] font-semibold uppercase tracking-widest mb-1">
-                      {profile.scenario}
-                    </span>
                     <h3 className="font-display font-extrabold text-white text-xl transition-colors group-hover:text-indigo-300">
                       {profile.role}
                     </h3>
