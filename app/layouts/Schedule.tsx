@@ -4,12 +4,11 @@
 import { useEffect, useRef, useState } from "react";
 // next-imports
 import Link from "next/link";
-import Image from "next/image";
 // Google analytics imports
 import { sendGAEvent } from "@next/third-parties/google";
 // icons-imports
+import { ChevronsRight } from "lucide-react";
 import {
-  ChevronsRight,
   Calendar as CalendarIcon,
   Sparkles,
   Layers,
@@ -18,16 +17,12 @@ import {
   HelpCircle,
   Clock,
   ArrowRight,
-  Mic2,
-  Users2,
-  LockKeyholeOpen,
 } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import CountDown from "@/components/ui/CountDown";
 import RegisterLink from "@/components/RegisterLink";
-import mockUp from "@/public/images/mockup.png";
 
 // Register the GSAP TextPlugin
 if (typeof window !== "undefined") {
@@ -40,6 +35,7 @@ const Schedule = () => {
   const calendarRef = useRef<HTMLDivElement>(null);
   const floatersRef = useRef<HTMLDivElement>(null);
 
+  // FIXED: Declared missing animation refs
   const textRef = useRef<HTMLSpanElement>(null);
   const actionsWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -66,14 +62,17 @@ const Schedule = () => {
       });
 
       questionTl
+        // 1. Fluidly type out sentence directly on the DOM node node
         .to(textRef.current, {
-          duration: question.length * 0.035,
+          duration: question.length * 0.035, // Balanced highly-readable pace
           text: question,
           ease: "none",
         })
+        // 2. Fire action menu triggers exactly on finish string sequence
         .call(() => {
           setShowAdjacentLinks(true);
         })
+        // 3. Keep text locked static for 5 seconds for clear reading window
         .to({}, { duration: 5 });
 
       masterTl.add(questionTl);
@@ -151,14 +150,14 @@ const Schedule = () => {
 
   return (
     <section id="schedule" className="relative py-16">
-      {/* <div
+      <div
         id="showcase-dashboard"
         className="relative mx-auto mt-12 w-full lg:w-8/12 px-2 lg:mt-12"
       >
         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative rounded-3xl border border-white/10 bg-[#09090e] p-6 backdrop-blur-xl shadow-2xl shadow-indigo-500/5">
-          {/* Top Control Bar 
+          {/* Top Control Bar */}
           <div className="mb-6 flex items-center justify-between border-b border-white/5 bg-white/[0.02] -mx-6 -mt-6 px-6 py-4">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-red-500" />
@@ -174,7 +173,7 @@ const Schedule = () => {
             </div>
           </div>
 
-          {/* Floating Badges *
+          {/* Floating Badges */}
           <div
             ref={floatersRef}
             className="pointer-events-none absolute inset-x-0 -top-6 flex justify-between px-4"
@@ -191,7 +190,7 @@ const Schedule = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-5">
-            {/* Left panel: June Calendar 
+            {/* Left panel: June Calendar */}
             <div
               ref={calendarRef}
               className="rounded-2xl border border-white/5 bg-black/40 p-4 md:col-span-2"
@@ -251,71 +250,48 @@ const Schedule = () => {
               <CountDown />
             </div>
 
-            {/* Right panel: Live Destination Details & Telegram Space Interface 
+            {/* Right panel: Journal Logs */}
             <div className="flex flex-col justify-between space-y-4 md:col-span-3">
               <div className="space-y-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4">
                 <div className="flex items-center gap-1.5 font-mono text-xs text-gray-500">
                   <FileText className="h-3 w-3" />
-                  <span>LOCATION & ACCESS ROUTING</span>
+                  <span>PERSONAL JOURNAL LOGS</span>
                 </div>
 
-                {/* Where Component Card 
                 <div className="flex gap-4">
-                  <div className="text-xs font-mono text-gray-500 shrink-0 uppercase pt-0.5">
-                    Where
+                  <div className="text-xs font-mono text-gray-500 shrink-0">
+                    26 JUN
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-indigo-400 font-bold mb-1 uppercase tracking-wider">
-                      [ Portal Connection ]
+                    <p className="text-xs text-indigo-400 font-bold mb-1">
+                      [ PRE-EVENT LOG ]
                     </p>
-                    <div className="h-1 w-full bg-white/5 rounded mb-2">
-                      <div className="h-full w-full bg-gradient-to-r from-indigo-500 to-sky-400 rounded animate-pulse"></div>
+                    <div className="h-1 w-full bg-white/5 rounded">
+                      <div className="h-full w-2/3 bg-indigo-500/50 rounded animate-pulse"></div>
                     </div>
-                    <p className="text-sm text-white font-semibold">
-                      Live inside Uprix Space
+                    <p className="text-[11px] text-gray-500 italic mt-1.5">
+                      Is this really what I am supposed to be doing?
                     </p>
                   </div>
                 </div>
 
-                {/* Telegram Space Simulated UI Layout 
                 <div className="flex gap-4">
-                  <div className="text-xs font-mono text-sky-400 shrink-0 uppercase pt-2">
-                    Access
+                  <div className="text-xs font-mono text-indigo-400 shrink-0">
+                    27 JUN
                   </div>
-                  <div className="flex-1 bg-sky-950/20 border border-sky-500/20 rounded-xl p-3 shadow-inner">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <Mic2 className="h-3.5 w-3.5 text-sky-400 animate-bounce" />
-                        <span className="text-[11px] font-bold text-white tracking-wide uppercase">
-                          Telegram Space
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 rounded bg-sky-500/10 px-1.5 py-0.5 text-[9px] text-emerald-400 border border-emerald-500/20 font-mono">
-                        <LockKeyholeOpen className="h-2.5 w-2.5" />
-                        <span>OPEN ACCESS</span>
-                      </div>
-                    </div>
-
-                    <p className="text-xs font-semibold text-gray-200 mb-1">
-                      Completely FREE & Open to the public
+                  <div className="flex-1 bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-3">
+                    <p className="text-xs text-white font-bold mb-1">
+                      X-Deep June Session
                     </p>
-                    <p className="text-[10px] text-sky-300/80 leading-tight italic">
-                      "Bring an open mind and a notepad."
+                    <p className="text-[8px] text-gray-400 leading-tight italic">
+                      "Stop overthinking your future. Let's find your direction
+                      together."
                     </p>
-
-                    <div className="mt-2.5 flex items-center justify-between border-t border-sky-500/10 pt-2 text-[9px] text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <Users2 className="h-2.5 w-2.5" /> Everyone can listen
-                      </span>
-                      <span className="font-mono text-sky-400/60 font-bold">
-                        @UprixOfficial
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Typing Interactive Scanner Section 
+              {/* Typing Interactive Scanner Section */}
               <div
                 ref={terminalRef}
                 className="rounded-2xl border border-white/5 bg-black/40 p-4 font-mono text-xs"
@@ -327,6 +303,7 @@ const Schedule = () => {
                   <span className="flex h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
                 </div>
 
+                {/* FIXED: Replaced standard React text output tracking with an empty ref target container for GSAP */}
                 <div className="min-h-[50px] relative">
                   <HelpCircle className="absolute left-0 top-0.5 h-4 w-4 text-indigo-400" />
                   <p className="pl-6 text-[11px] leading-relaxed text-gray-300">
@@ -338,7 +315,7 @@ const Schedule = () => {
                   </p>
                 </div>
 
-                {/* Action Buttons Link Wrapper 
+                {/* Action Buttons Link Wrapper */}
                 <div
                   ref={linksContainerRef}
                   className="mt-3.5 border-t border-white/5 pt-3"
@@ -375,7 +352,7 @@ const Schedule = () => {
             </div>
           </div>
 
-          {/* Floating Overlay Badge 
+          {/* Floating Overlay Badge */}
           <div className="absolute bottom-8 right-[-14px] w-32 bg-white/10 backdrop-blur-md border border-white/15 p-3 rounded-xl shadow-xl transform rotate-3 z-20 pointer-events-auto shadow-black/50">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-emerald-500 rounded-full border border-emerald-400 animate-pulse"></div>
@@ -389,15 +366,13 @@ const Schedule = () => {
           </div>
 
           <div className="mt-4 flex items-center justify-between text-[10px] text-white/[0.8] font-semibold border-t border-white/5 pt-4">
-            <span>HOSTED STREAM ON TELEGRAM SPACES & GOOGLE MEET</span>
+            <span>HOSTED STREAM ON GOOGLE MEET</span>
           </div>
         </div>
       </div>
       <div className="w-3/12 lg:w-1/12 mt-4 mx-auto">
+        {" "}
         <RegisterLink source={"schedule"} />
-      </div> */}
-      <div className="flex justify-center">
-        <Image src={mockUp} alt="Mockup" width={800} height={800} />
       </div>
     </section>
   );
