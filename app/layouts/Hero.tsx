@@ -150,7 +150,7 @@ const Hero = () => {
 
       <div className="w-full flex items-center justify-center flex-col px-4 mt-4 relative z-10">
         {/* Core Main Title */}
-        <p className="hidden md:block font-deep text-xs text-primary-yellow mb-2">
+        <p className="hidden md:block font-embrace text-5xl text-primary-yellow mb-2">
           THE{" "}
         </p>
         <h1

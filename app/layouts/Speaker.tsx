@@ -17,8 +17,8 @@ if (typeof window !== "undefined") {
 
 const Speaker = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const portraitFrameRef = useRef<HTMLDivElement>(null);
+  const textContentRef = useRef<HTMLDivElement>(null);
+  const imageFrameRef = useRef<HTMLDivElement>(null);
   const floatBadgeRef = useRef<HTMLDivElement>(null);
 
   const credentials = [
@@ -33,193 +33,174 @@ const Speaker = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    // Use gsap.context for scoped, safe selector cleanups
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
+          start: "top 70%",
           toggleActions: "play none none none",
         },
-        defaults: { ease: "power3.out" },
+        defaults: { ease: "power4.out" },
       });
 
-      // 1. Staggered reveal for section title elements
-      if (headerRef.current) {
+      // 1. Reveal Premium Image Side
+      if (imageFrameRef.current) {
         tl.fromTo(
-          headerRef.current.children,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 },
+          imageFrameRef.current.querySelector(".bg-gradient-to-tr"),
+          { opacity: 0, scale: 0.9 },
+          { opacity: 0.25, scale: 1, duration: 1.4 },
+        );
+        tl.fromTo(
+          imageFrameRef.current.querySelector(".photo-wrapper"),
+          { opacity: 0, y: 40, rotate: -2 },
+          { opacity: 1, y: 0, rotate: 0, duration: 1 },
+          "-=1",
         );
       }
 
-      // 2. Premium image card reveal
-      if (portraitFrameRef.current) {
-        // Backglow blur layer
-        tl.fromTo(
-          portraitFrameRef.current.querySelector(".bg-gradient-to-r"),
-          { opacity: 0, scale: 0.8 },
-          { opacity: 0.2, scale: 1, duration: 1.2 },
-          "-=0.6",
-        );
-
-        // Main Photo Card
-        tl.fromTo(
-          portraitFrameRef.current.querySelector(".main-photo-card"),
-          { opacity: 0, y: 30, scale: 0.98 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.9 },
-          "-=0.9",
-        );
-      }
-
-      // 3. Float badge pop entry followed by infinite hover cycle loop
+      // 2. Pop Floating Badge & Trigger Infinite Yoyo Hover Loop
       if (floatBadgeRef.current) {
         tl.fromTo(
           floatBadgeRef.current,
-          { opacity: 0, scale: 0.8, y: 15, rotate: 0 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            rotate: 3,
-            duration: 0.6,
-            ease: "back.out(1.5)",
-          },
-          "-=0.4",
+          { opacity: 0, scale: 0.7, x: 20 },
+          { opacity: 1, scale: 1, x: 0, duration: 0.6, ease: "back.out(1.7)" },
+          "-=0.6",
         );
 
         tl.call(() => {
           gsap.to(floatBadgeRef.current, {
-            y: -5,
-            duration: 2.2,
+            y: -8,
+            duration: 2,
             ease: "sine.inOut",
             yoyo: true,
             repeat: -1,
           });
         });
       }
+
+      // 3. Stagger Editorial Text Content Hierarchy
+      if (textContentRef.current) {
+        tl.fromTo(
+          textContentRef.current.children,
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 },
+          "-=0.8",
+        );
+      }
     }, sectionRef);
 
-    return () => ctx.revert(); // Safely reverts only animations created inside this component
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="speaker"
-      className="relative w-full mx-auto py-24 overflow-hidden flex items-center justify-center"
+      className="relative md:w-10/12 mx-auto py-24 lg:py-32 overflow-hidden flex items-center justify-center text-white"
     >
-      {/* Background radial glows */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-purple-950/10 blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-indigo-950/15 rounded-full blur-[100px] pointer-events-none z-0" />
+      {/* Background radial glows - Depth Layers */}
 
-      <div className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
-        {/* Module Header */}
-        <div
-          ref={headerRef}
-          className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto space-y-4 mb-16"
-        >
-          <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Your Guide</span>
-          </div>
-
-          <p className="text-sm text-center text-gray-400 max-w-xl">
-            Learn directly from someone who is dedicated to helping people
-            navigate critical turning points, career pivots, and identity
-            restarts.
-          </p>
+      <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
+        {/* Meta Label Indicator */}
+        <div className="mb-6 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
+          <Sparkles className="h-4 w-4" />
+          <span>Meet Your Guide</span>
         </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* LEFT SIDE: Premium Geometric Portrait */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
+            <div
+              ref={imageFrameRef}
+              className="relative w-full max-w-[340px] sm:max-w-[380px]"
+            >
+              {/* Backglow Ambient Canvas Element */}
 
-        {/* Master Content Grid */}
-        <div className="flex flex-col items-center justify-center">
-          {/* Column: Premium Framed Portrait Image */}
-          <div
-            ref={portraitFrameRef}
-            className="flex flex-col items-center justify-center relative z-20"
-          >
-            <div className="relative group w-full max-w-[380px] xs:max-w-md">
-              {/* Backglow border layer */}
-              <div className="absolute -inset-2 rounded-[32px] bg-gradient-to-r from-indigo-500 to-purple-600 opacity-20 blur-lg group-hover:opacity-30 transition-all duration-500 pointer-events-none z-0" />
-
-              {/* Main Photo Container */}
-              <div className="main-photo-card relative rounded-[28px] h-[520px] w-[360px] mx-auto sm:w-[400px] md:w-[460px] md:h-[580px] border border-white/10 overflow-hidden bg-black/40 shadow-2xl z-10">
+              {/* Photo Wrapper frame */}
+              <div className="relative main-photo-card shadow-lg shadow-blue-900 relative rounded-[28px] h-[520px] w-[360px] mx-auto sm:w-[400px] md:w-[400px] md:h-[580px] border border-white/10 overflow-hidden bg-black/40 shadow-2xl z-10">
                 <Image
                   src={speakerPortrait}
                   alt="Taifaq, Workshop Guide"
                   className="w-full h-full object-cover transition duration-700 scale-[1.01] group-hover:scale-105"
-                  width={500}
-                  height={600}
+                  width={400}
+                  height={500}
                   id="speaker-portrait-img"
                   priority
                 />
-
-                {/* Translucent overlay label */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6 z-20 pt-20">
-                  <div className="relative z-10">
-                    <p className="text-xs/6 text-white/[0.8]">
-                      I am <span className="text-indigo-300">Taiwo Faruq</span>,
-                      but you can just call me Taifaq. I am a creative designer,
-                      brand strategist, and a 300-level English Language and
-                      Literature student at the University of Ibadan. <br />I
-                      don't sit in a high corporate office giving abstract
-                      advice. I am in the trenches with you every single day. I
-                      know exactly what it feels like to struggle with
-                      consistency while trying to scale Taifaq Pixels, manage
-                      communities, and keep up with university grades. <br />I
-                      have faced the exact same procrastination and self-doubt
-                      that you are dealing with right now. I didn't beat
-                      procrastination by becoming a robot; I beat it by building
-                      simple, repeatable systems that work even when I feel
-                      completely unmotivated. In this July X-Deep, I am
-                      stripping away the fluff and handing you those exact
-                      systems. <br />
-                      <br />
-                      <span className="font-bold text-sm text-primary-yellowBlock">
-                        Let's stop overthinking. Let's start executing.
-                      </span>
-                    </p>
-                  </div>
-
-                  {/* Credential lists */}
-                  <div className="hidden lg:flex w-full flex-wrap items-center gap-2 pt-4 relative z-10">
-                    {credentials.map((credential: string) => (
-                      <span
-                        key={credential}
-                        className="text-white/[0.8] text-[10px] border border-white/5 bg-white/[0.02] backdrop-blur-3xl px-2 py-1.5 rounded-lg transition-all duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] select-none"
-                      >
-                        {credential}
-                      </span>
-                    ))}
-                  </div>
+                <span className="absolute top-5 left-5 text-white border rounded-[14px] p-2 backdrop-blur-3xl font-medium text-2xl sm:text-xl block sm:inline sm:ml-2">
+                  Taifaq
+                </span>
+                <div className="absolute bottom-1 w-full flex flex-wrap gap-2 p-4 border-t border-white/5 z-50">
+                  {credentials.map((credential: string) => (
+                    <span
+                      key={credential}
+                      className="text-slate-300 text-xs border border-white/10 bg-white/[0.03] backdrop-blur-md px-3 py-1.5 rounded-xl transition-all duration-300 hover:border-indigo-500/40 hover:bg-white/[0.07] select-none"
+                    >
+                      {credential}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              {/* Floating aesthetic accent widget */}
+              {/* Floating Live Badge */}
               <div
                 ref={floatBadgeRef}
-                className="absolute top-6 -right-4 bg-[#0d0d15]/90 backdrop-blur-md border border-white/10 px-3.5 py-2.5 rounded-2xl shadow-xl hidden sm:block z-30"
+                className="absolute top-8 -right-4 bg-slate-900/90 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-2xl shadow-xl hidden sm:block z-20 select-none"
               >
-                <p className="text-[10px] font-mono text-indigo-300 uppercase tracking-widest font-bold">
-                  LIVE Q&A SESSION
-                </p>
-                <p className="text-[11px] text-white font-medium">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <p className="text-[10px] font-mono text-indigo-300 uppercase tracking-widest font-bold">
+                    LIVE Q&A STAGE
+                  </p>
+                </div>
+                <p className="text-xs text-white font-medium mt-0.5">
                   Ask Your Questions Live
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Credential lists */}
-            <div className="flex lg:hidden w-full flex-wrap items-center gap-2 pt-4 relative z-10">
-              {credentials.map((credential: string) => (
-                <span
-                  key={credential}
-                  className="text-white/[0.8] text-[10px] border border-white/5 bg-white/[0.02] backdrop-blur-3xl px-2 py-1.5 rounded-lg transition-all duration-300 hover:border-indigo-500/30 hover:bg-white/[0.04] select-none"
-                >
-                  {credential}
-                </span>
-              ))}
+          {/* RIGHT SIDE: Editorial Biography Copy */}
+          <div
+            ref={textContentRef}
+            className="w-full md:w-10/12 lg:col-span-7 flex flex-col space-y-6 text-left"
+          >
+            {/* Premium Big Typography Name Header */}
+            <h2 className="font-display sm:text-3xl font-black tracking-tight text-white">
+              Taiwo Faruq{" "}
+            </h2>
+
+            {/* Split Paragraph Narrative Context Rows */}
+            <div className="space-y-4 text-base/relaxed text-slate-300 font-sans max-w-xl">
+              <p>
+                I am a creative designer, brand strategist, and an English
+                Language and Literature student at the University of Ibadan. I
+                don&apos;t sit in a high corporate office giving abstract
+                advice—
+                <strong className="text-white">
+                  I am in the trenches with you every single day.
+                </strong>
+              </p>
+              <p>
+                I know exactly what it feels like to struggle with consistency
+                while trying to scale Taifaq Pixels, manage communities, and
+                keep up with university grades. I have faced the exact same
+                procrastination and self-doubt that you are dealing with right
+                now.
+              </p>
+              <p>
+                I didn&apos;t beat procrastination by becoming a robot; I beat
+                it by building simple, repeatable systems that work even when I
+                feel completely unmotivated. In this July X-Deep, I am stripping
+                away the fluff and handing you those exact systems.
+              </p>
             </div>
+
+            {/* Accent Punchline Text Block banner */}
+            <p className="text-lg font-bold text-primary-yellow tracking-wide pt-2 border-l-2 border-primary-yellow pl-4">
+              Let&apos;s stop overthinking. Let&apos;s start executing.
+            </p>
+
+            {/* Micro Tag Credentials Horizontal Flex Loop Grid */}
           </div>
         </div>
       </div>
