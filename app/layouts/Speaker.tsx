@@ -101,6 +101,7 @@ const Speaker = () => {
       {/* Background radial glows - Depth Layers */}
 
       <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
+        {/* (removed top smoothing gradient — About is the next section) */}
         {/* Meta Label Indicator */}
         <div className="mb-6 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
           <Sparkles className="h-4 w-4" />

@@ -86,7 +86,7 @@
   --secondary-blue: #07017b;
   --primary-yellow: #ffdd0a;
   --hero-bg-dark: #010103;
-  --hero-bg-mid: rgb(74, 77, 83);
+  --hero-bg-mid: rgb(4, 21, 50);
   --hero-accent: #ffb84d;
 }
 
@@ -135,18 +135,7 @@
 
   html {
     scroll-behavior: smooth;
-    background:
-      radial-gradient(
-        circle at 12% 8%,
-        rgba(255, 184, 77, 0.06),
-        transparent 8%
-      ),
-      radial-gradient(
-        circle at 50% 0%,
-        var(--hero-bg-mid) 0%,
-        var(--hero-bg-dark) 60%
-      ),
-      linear-gradient(180deg, var(--hero-bg-dark) 60%, #000 100%);
+    background-color: var(--hero-bg-dark);
     background-attachment: fixed;
     color: #f3f4f6;
     scroll-behavior: smooth;

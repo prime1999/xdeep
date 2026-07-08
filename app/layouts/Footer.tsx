@@ -86,8 +86,8 @@ const Footer = () => {
         {/* Upper layout */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 pb-8 border-b border-white/5">
           <p className="text-center text-xs text-gray-500 italic max-w-xs md:text-center">
-            "We do not need hype. When confused, we look for clarity and honest
-            truths."
+            "When overthinking paralyzes, we look for clarity, honest truths,
+            and immediate action."
           </p>
         </div>
 
@@ -102,7 +102,7 @@ const Footer = () => {
         </button>
 
         {/* Lower layout with copy and credits */}
-        <div className="flex flex-col sm:flex-row items-center justify-between backdrop-blur-3xl gap-4 mt-6 text-[10px] text-gray-600">
+        <div className="flex flex-col sm:flex-row items-center justify-between backdrop-blur-3xl gap-4 mt-6 text-[11px] text-gray-600">
           {/* Main host indicator */}
           <div className="flex items-center justify-center">
             <Image

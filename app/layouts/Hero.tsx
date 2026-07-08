@@ -128,7 +128,7 @@ const Hero = () => {
       >
         <span className="flex items-end select-none">
           <p className="font-deep text-6xl text-white/[0.8]">x</p>
-          <h6 className="text-lg font-heading tracking-wide text-white/[0.8]">
+          <h6 className="-ml-1 text-lg font-heading tracking-wide text-white/[0.8]">
             - deep
           </h6>
         </span>
@@ -162,7 +162,7 @@ const Hero = () => {
             Stop Planning. Start Xecuting.
           </span>{" "}
         </h1>
-        <p className="md:hidden font-deep text-xs text-primary-yellow mb-2">
+        <p className="md:hidden font-embrace text-2xl text-primary-yellow mb-2">
           THE{" "}
         </p>
         <h1
@@ -178,9 +178,9 @@ const Hero = () => {
         {/* Narrative Description Block */}
         <p
           ref={subtextRef}
-          className="md:w-8/12 lg:w-5/12 font-sans text-center text-sm/relaxed mt-5 text-gray-400"
+          className="w-9/12 lg:w-5/12 font-sans text-center text-sm/relaxed mt-5 text-gray-300"
         >
-          This is not a lecture; it is a raw, deep conversation designed to drag
+          This is not a lecture, it is a raw, deep conversation designed to drag
           you out of your head and push you into messy, profitable action.
         </p>
 
@@ -205,7 +205,7 @@ const Hero = () => {
               AL
             </div>
           </div>
-          <p className="pl-4 text-xs text-gray-400 font-sans">
+          <p className="pl-4 text-xs text-gray-300 font-sans">
             Join <span className="font-bold text-white">over hundreds</span> of
             young creatives fighting the same battle this month.
           </p>

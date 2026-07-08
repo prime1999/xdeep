@@ -7,6 +7,7 @@ import { AlertCircle } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RegisterLink from "@/components/RegisterLink";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -36,6 +37,7 @@ const Fix = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   const painPoints = [
     {
@@ -105,6 +107,16 @@ const Fix = () => {
       );
     }
 
+    // 4. Elastic reveal pop for the main CTA redirect block
+    if (ctaRef.current) {
+      tl.fromTo(
+        ctaRef.current,
+        { opacity: 0, scale: 0.9, y: 10 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.3)" },
+        "-=0.3",
+      );
+    }
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -157,6 +169,10 @@ const Fix = () => {
               />
             </div>
           ))}
+        </div>
+        {/* Action Link Target */}
+        <div ref={ctaRef} className="flex justify-center mt-6">
+          <RegisterLink source={"audience"} />
         </div>
       </div>
     </section>

@@ -2,12 +2,7 @@
 
 // react-imports
 import { useEffect, useRef } from "react";
-// next-imports
-import Link from "next/link";
-// Google analytics imports
-import { sendGAEvent } from "@next/third-parties/google";
-// icons-imports
-import { ChevronsRight } from "lucide-react";
+
 import {
   GraduationCap,
   Briefcase,
@@ -18,7 +13,6 @@ import {
 // gsap-imports
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import RegisterLink from "@/components/RegisterLink";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -29,7 +23,6 @@ const Audience = () => {
   const introRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const noticeRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
 
   const users = [
     {
@@ -96,16 +89,6 @@ const Audience = () => {
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.7 },
         "-=0.4",
-      );
-    }
-
-    // 4. Elastic reveal pop for the main CTA redirect block
-    if (ctaRef.current) {
-      tl.fromTo(
-        ctaRef.current,
-        { opacity: 0, scale: 0.9, y: 10 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.3)" },
-        "-=0.3",
       );
     }
 
@@ -188,11 +171,6 @@ const Audience = () => {
           <span className="font-mono text-[9px] text-gray-400 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg shrink-0 select-none uppercase tracking-[0.2em] font-bold">
             X-Deep Public Access
           </span>
-        </div>
-
-        {/* Action Link Target */}
-        <div ref={ctaRef} className="flex justify-center mt-6">
-          <RegisterLink source={"audience"} />
         </div>
       </div>
     </section>
