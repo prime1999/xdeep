@@ -12,11 +12,11 @@ type Props = {
 const RegisterLink = ({ source }: Props) => {
   return (
     <Link
-      href="https://wa.link/8yf5wm"
+      href="https://wa.link/3fb9qh"
       target="_blank"
       onClick={() => {
         sendGAEvent("event", "register_click", {
-          link_url: "https://wa.link/8yf5wm",
+          link_url: "https://wa.link/3fb9qh",
           source,
         });
       }}
