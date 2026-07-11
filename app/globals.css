@@ -125,7 +125,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --primary-blue: #0907d7;
   --secondary-blue: #07017b;
-  --primary-yellow: #ffdd0a;
+  --primary-yellow: #ffdd00;
 }
 
 @layer base {
