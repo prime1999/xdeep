@@ -103,11 +103,11 @@ const Speaker = () => {
       <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
         {/* (removed top smoothing gradient — About is the next section) */}
         {/* Meta Label Indicator */}
-        <div className="mb-6 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
+        <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
           <Sparkles className="h-4 w-4" />
           <span>Meet Your Guide</span>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT SIDE: Premium Geometric Portrait */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
             <div
@@ -117,7 +117,7 @@ const Speaker = () => {
               {/* Backglow Ambient Canvas Element */}
 
               {/* Photo Wrapper frame */}
-              <div className="relative main-photo-card shadow-lg shadow-blue-900 relative rounded-[28px] h-[520px] w-[360px] mx-auto sm:w-[400px] md:w-[400px] md:h-[580px] border border-white/10 overflow-hidden bg-black/40 shadow-2xl z-10">
+              <div className="relative main-photo-card shadow-lg shadow-blue-900 relative rounded-[28px] h-[300px] w-[360px] mx-auto sm:w-[400px] md:w-[400px] md:h-[400px] border border-white/10 overflow-hidden bg-black/40 shadow-2xl z-10">
                 <Image
                   src={speakerPortrait}
                   alt="Taifaq, Workshop Guide"
@@ -166,40 +166,27 @@ const Speaker = () => {
             className="w-full md:w-10/12 lg:col-span-7 flex flex-col space-y-6 text-left"
           >
             {/* Premium Big Typography Name Header */}
-            <h2 className="font-display sm:text-3xl font-black tracking-tight text-white">
-              Taiwo Faruq{" "}
-            </h2>
 
             {/* Split Paragraph Narrative Context Rows */}
             <div className="space-y-4 text-base/relaxed text-slate-300 font-sans max-w-xl">
-              <p>
-                I am a creative designer, brand strategist, and an English
-                Language and Literature student at the University of Ibadan. I
-                don&apos;t sit in a high corporate office giving abstract
-                advice—
-                <strong className="text-white">
-                  I am in the trenches with you every single day.
-                </strong>
+              {/* Accent Punchline Text Block banner */}
+              <p className="text-sm font-bold text-primary-yellow tracking-wide border-l-2 border-primary-yellow pl-4">
+                A Word from Taifaq
               </p>
-              <p>
-                I know exactly what it feels like to struggle with consistency
-                while trying to scale Taifaq Pixels, manage communities, and
-                keep up with university grades. I have faced the exact same
-                procrastination and self-doubt that you are dealing with right
-                now.
-              </p>
-              <p>
-                I didn&apos;t beat procrastination by becoming a robot; I beat
-                it by building simple, repeatable systems that work even when I
-                feel completely unmotivated. In this July X-Deep, I am stripping
-                away the fluff and handing you those exact systems.
+
+              <p className="mt-16">
+                I’m Taiwo Faruq, known as Taifaq.
+                <br /> <br />I don't speak from theory or a fancy office. I am a
+                student at the University of Ibadan, and I do the work every
+                day. I run client projects, build brands, and handle school at
+                the same time. <br />
+                <br />
+                For a long time, I worked myself to exhaustion without seeing
+                real money. Things only changed when I stopped guessing and
+                built a clear, repeatable system. On September 30th, I will
+                share that exact system with you for free.
               </p>
             </div>
-
-            {/* Accent Punchline Text Block banner */}
-            <p className="text-lg font-bold text-primary-yellow tracking-wide pt-2 border-l-2 border-primary-yellow pl-4">
-              Let&apos;s stop overthinking. Let&apos;s start executing.
-            </p>
 
             {/* Micro Tag Credentials Horizontal Flex Loop Grid */}
           </div>

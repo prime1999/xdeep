@@ -13,8 +13,7 @@ import RegisterLink from "@/components/RegisterLink";
 // layout component imports
 import Navbar from "./Navbar";
 // images imports
-import heroImage from "@/public/images/hero-image.png";
-import clock from "@/public/images/clock.png";
+import smoke from "@/public/images/smoke.png";
 
 const Hero = () => {
   // Animation Container References
@@ -104,43 +103,35 @@ const Hero = () => {
   return (
     <main
       ref={containerRef}
-      style={{
-        backgroundImage: `url(${heroImage.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "var(--hero-bg-mid)",
-        backgroundBlendMode: "overlay",
-      }}
       className="w-full flex items-center justify-center flex-col gap-2 min-h-[90vh] relative overflow-hidden"
     >
       {/* Background glow matrix to fit the Uprix dark aesthetic */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-black rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent to-[#020617]" />
-      {/* <div className="absolute top-[50px] right-[10px] opacity-20">
-        <Image src={clock} alt="Clock" width={700} height={700} />
-      </div> */}
-
+      <div className="absolute -bottom-10 opacity-30">
+        <Image src={smoke} alt="Smoke" width={1500} height={1500} />
+      </div>
+      {/* <h1 className="absolute top-3 text-[400px] text-gray-900 uppercase font-bold">
+        third
+      </h1> */}
       {/* Brand Identity Display Header */}
       <div
         ref={logoRef}
-        className="mt-16 flex flex-col items-center gap-1 text-white/[0.8]"
+        className="mt-16 flex flex-col items-center gap-1 text-white/[0.8] z-50"
       >
         <span className="flex items-end select-none">
-          <p className="font-deep text-6xl text-white/[0.8]">x</p>
-          <h6 className="-ml-1 text-lg font-heading tracking-wide text-white/[0.8]">
+          <p className="font-deep text-6xl text-white">x</p>
+          <h6 className="-ml-1 text-lg font-heading tracking-wide text-white">
             - deep
           </h6>
         </span>
-        <p className="text-[10px] uppercase font-mono tracking-widest text-primary-yellow">
-          July Edition
-        </p>
+        <p className="text-primary-yellow">September Edition</p>
       </div>
 
       {/* Target Public Badge */}
       <span
         ref={badgeRef}
-        className="flex items-center gap-2 text-center justify-center border border-white/10 bg-white/[0.03] px-4 py-1.5 rounded-full mt-4 backdrop-blur-sm"
+        className="flex items-center gap-2 text-center justify-center border border-white/10 bg-white/[0.03] px-4 py-1.5 rounded-full mt-4 backdrop-blur-sm z-40"
       >
         <Target className="text-indigo-400 animate-pulse" size={13} />
         <h6 className="text-[11px] tracking-wide text-gray-300 font-sans">
@@ -148,31 +139,18 @@ const Hero = () => {
         </h6>
       </span>
 
-      <div className="w-full flex items-center justify-center flex-col px-4 mt-4 relative z-10">
+      <div className="w-full flex items-center justify-center text-center flex-col px-4 mt-4 relative z-40">
         {/* Core Main Title */}
-        <p className="hidden md:block font-embrace text-5xl text-primary-yellow mb-2">
-          THE{" "}
-        </p>
-        <h1
-          ref={headlineRef}
-          className="hidden md:block w-full tracking-wider mx-auto font-bold text-3xl/tight md:text-5xl/tight md:w-10/12 lg:w-9/12 text-center text-primary-yellow space-y-2 font-embrace"
-        >
-          PROCASTNATION SOLUTION
-          <span className="text-white tracking-tight inline-block mt-4">
-            Stop Planning. Start Xecuting.
-          </span>{" "}
-        </h1>
-        <p className="md:hidden font-embrace text-2xl text-primary-yellow mb-2">
-          THE{" "}
-        </p>
-        <h1
-          ref={headlineRef}
-          className="md:hidden w-full tracking-wider mx-auto font-bold text-[25px]/9 text-center text-primary-yellow space-y-2 font-embrace"
-        >
-          PROCASTNATION SOLUTION
-          <span className="text-2xl tracking-tight text-white inline-block mt-4">
-            Stop Planning. Start Xecuting.
-          </span>{" "}
+
+        <h4 className="text-xl md:text-4xl font-bold text-primary-yellow">
+          Making Your First
+        </h4>
+        <h1 className="flex flex-col items-center justify-center gap-2 mt-4 text-4xl text-white font-extrabold font-deep tracking-tight">
+          {" "}
+          ₦1,000,000
+          <span className="text-5xl ml-1 font-normal text-primary-blue font-heading">
+            in Any Business.
+          </span>
         </h1>
 
         {/* Narrative Description Block */}
@@ -180,8 +158,9 @@ const Hero = () => {
           ref={subtextRef}
           className="w-9/12 lg:w-5/12 font-sans text-center text-sm/relaxed mt-5 text-gray-300"
         >
-          This is not a lecture, it is a raw, deep conversation designed to drag
-          you out of your head and push you into messy, profitable action.
+          No empty motivational talk. No big English words here. Just the
+          practical, step-by-step steps you need to take your business from zero
+          to seven figures.
         </p>
 
         {/* Action Registration Button */}
@@ -194,20 +173,9 @@ const Hero = () => {
           ref={avatarsRef}
           className="flex items-center gap-2 mt-6 rounded-2xl p-3"
         >
-          <div className="flex -space-x-3">
-            <div className="w-8 h-8 rounded-full border-2 border-[#030712] bg-indigo-950 flex items-center justify-center text-[9px] font-bold text-indigo-300">
-              JD
-            </div>
-            <div className="w-8 h-8 rounded-full border-2 border-[#030712] bg-purple-950 flex items-center justify-center text-[9px] font-bold text-purple-300">
-              MK
-            </div>
-            <div className="w-8 h-8 rounded-full border-2 border-[#030712] bg-slate-900 flex items-center justify-center text-[9px] font-bold text-gray-300">
-              AL
-            </div>
-          </div>
           <p className="pl-4 text-xs text-gray-300 font-sans">
-            Join <span className="font-bold text-white">over hundreds</span> of
-            young creatives fighting the same battle this month.
+            For young builders ready to stop chasing pennies and start building
+            a real income.
           </p>
         </div>
 

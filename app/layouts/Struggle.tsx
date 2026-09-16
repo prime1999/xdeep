@@ -10,6 +10,7 @@ import {
   Ban,
   Frown,
   MessageSquareText,
+  Atom,
 } from "lucide-react";
 // gsap-imports
 import { gsap } from "gsap";
@@ -19,7 +20,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const About = () => {
+const Struggle = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -27,26 +28,26 @@ const About = () => {
 
   const highlights = [
     {
-      title: "The Spark",
-      desc: "You wake up with a brilliant idea. You get incredibly excited about a new skill, a personal brand layout, or a business concept. You tell yourself, 'This is the one.'",
+      title: "The Low-Pay Trap",
+      desc: "You put your heart into the work, but you are afraid to state your real price because you think the client will run away",
       icon: Brain,
       color: "text-indigo-400",
     },
     {
-      title: "The Freeze",
-      desc: "You open your laptop or phone to start. Suddenly, a wave of self-doubt hits you. You feel like you are not good enough yet, or you worry about what people will say if it fails.",
+      title: "The Dry Month Panic",
+      desc: " You make a little money this week, but by next week, your account is dry again because you don't know where the next client is coming from.",
       icon: CircleStop,
       color: "text-red-500",
     },
     {
-      title: "The Delay",
-      desc: "You tell yourself you need to do more research first. You promise to start 'tomorrow' when you have more energy or better timing.",
+      title: "The Free Advice Trap",
+      desc: " People enter your DMs to ask for help, praise your work, and take your ideas, but nobody is actually paying you.",
       icon: Ban,
       color: "text-red-900",
     },
     {
-      title: "The Guilt",
-      desc: "Tomorrow comes, and you spend hours scrolling on social media instead. You go to bed feeling guilty, heavy, and frustrated that another day slipped away.",
+      title: "The Quiet Frustration",
+      desc: "You look at your phone, tired and stressed, wondering if you are even good enough to succeed.",
       icon: Frown,
       color: "text-black",
     },
@@ -113,7 +114,7 @@ const About = () => {
   return (
     <section
       ref={sectionRef}
-      id="the-reality"
+      id="the-struggle"
       className="relative py-20 overflow-hidden"
     >
       {/* Aurora spotlight */}
@@ -127,49 +128,65 @@ const About = () => {
         >
           <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
             <MessageCircle className="h-3.5 w-3.5" />
-            <span className="font-semibold text-center">The Reality check</span>
+            <span className="font-semibold text-center">The Struggle</span>
           </div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-5xl">
-            The 72-Hour Cycle You Keep Repeating
+          <h2 className="font-display text-xl font-bold tracking-tight text-white md:text-3xl">
+            The Daily Struggle Keeping You Broke
           </h2>
           <p className="mx-auto max-w-xl text-sm leading-relaxed text-gray-400">
-            Let’s be honest about what happens every single week:
+            Does your daily life look like this?
           </p>
         </div>
 
         {/* Feature Highlights Grid */}
         <div
           ref={gridRef}
-          className="w-11/12 mx-auto mt-16 grid grid-cols-1 gap-6 md:grid-cols-4"
+          className="w-11/12 mx-auto mt-16 flex flex-col gap-6 items-center justify-center md:flex-row"
         >
           {highlights.map((item, idx) => {
             const IconComponent = item.icon;
             return (
               <div
                 key={item.title}
-                className="group relative rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xs p-6 space-y-4 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] flex flex-col justify-between"
+                className="relative w-56 h-56 rounded-[14px] p-5 flex flex-col justify-between overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(155deg, #07017b 0%, #07017b 60%, #07017b 100%)",
+                  boxShadow:
+                    "0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)",
+                }}
               >
-                {/* Background numbers indicator - Elegant translucent design style */}
-                <span className="absolute top-4 right-6 font-mono font-extrabold text-white/[0.03] text-5xl select-none leading-none z-0 transition-colors group-hover:text-white/[0.06]">
-                  {`0${idx + 1}`}
-                </span>
+                {/* soft corner glow */}
+                <div
+                  className="absolute -top-10 -left-10 w-32 h-32 rounded-full opacity-30 blur-2xl"
+                  style={{
+                    background:
+                      "radial-gradient(circle, #ffffff 0%, transparent 70%)",
+                  }}
+                />
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <span
-                    className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ${item.color} shadow-sm border border-white/5 transition-transform duration-300 group-hover:scale-110`}
-                  >
-                    <IconComponent className="h-5 w-5" />
-                  </span>
-
-                  {/* Title & Description */}
-                  <h3 className="font-display font-bold text-white text-lg mt-4 transition-colors group-hover:text-indigo-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed mt-2">
-                    {item.desc}
-                  </p>
+                {/* icon badge */}
+                <div
+                  className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(160deg,#0907d7,#111 70%)",
+                    boxShadow:
+                      "0 6px 14px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15)",
+                  }}
+                >
+                  <IconComponent
+                    size={26}
+                    strokeWidth={1.75}
+                    className="text-white/90"
+                  />
                 </div>
+
+                <h3 className="font-display font-bold text-white text-lg mt-4 transition-colors group-hover:text-indigo-300">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-400 leading-relaxed mt-2">
+                  {item.desc}
+                </p>
               </div>
             );
           })}
@@ -182,8 +199,8 @@ const About = () => {
         >
           <div className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 rounded-full bg-indigo-500/5 blur-2xl" />
           <p className="text-sm text-gray-200 leading-relaxed italic">
-            "This is not a discipline problem. It is an overthinking problem.
-            And it stops the moment you enter the room."
+            "Making your first ₦1,000,000 is not luck. It is simply clear math
+            and a simple process that brings in paying clients."
           </p>
         </div>
       </div>
@@ -191,4 +208,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Struggle;

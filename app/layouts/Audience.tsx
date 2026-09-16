@@ -26,20 +26,20 @@ const Audience = () => {
 
   const users = [
     {
-      role: "The Overloaded Student",
-      desc: "You are drowning in school assignments and exams, but you desperately want to build a skill or business on the side without crashing.",
+      role: "You Are a Student Running a Hustle",
+      desc: "You need a simple way to make money without failing your tests or losing your sleep.",
       icon: GraduationCap,
       accent: "from-indigo-500/10 to-transparent border-indigo-950",
     },
     {
-      role: "The Quiet Perfectionist",
-      desc: "You feel like you need one more course, one more video, or one more design before you are 'good enough' to put yourself out there.",
+      role: "You Have a Skill",
+      desc: "You design, edit videos, write, or manage pages, but you are tired of being paid tiny money.",
       icon: Briefcase,
       accent: "from-purple-500/10 to-transparent border-purple-950",
     },
     {
-      role: "The Inconsistent Builder",
-      desc: "You are tired of starting projects with massive energy in week one, only to watch them disappear by week three.",
+      role: "You Sell a Product or Service",
+      desc: "You need a simple way to make money without failing your tests or losing your sleep.",
       icon: BookOpen,
       accent: "from-amber-500/10 to-transparent border-amber-950",
     },
@@ -111,12 +111,11 @@ const Audience = () => {
         <div ref={introRef} className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-primary-yellow">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Is this for you?</span>
+            <span>Who Its for</span>
           </div>
 
           <p className="text-sm border-l-2 border-primary-blue pl-4 text-gray-400 leading-relaxed max-w-xl">
-            This X-Deep session isn't for people who want a hype-filled
-            motivational speech. It is explicitly crafted for:
+            This Space Is for You If:
           </p>
         </div>
 
@@ -140,7 +139,7 @@ const Audience = () => {
 
                   {/* Copy labels */}
                   <div>
-                    <h3 className="font-display font-extrabold text-white text-xl transition-colors group-hover:text-indigo-300">
+                    <h3 className="font-display font-extrabold text-white text-lg transition-colors group-hover:text-indigo-300">
                       {profile.role}
                     </h3>
                   </div>

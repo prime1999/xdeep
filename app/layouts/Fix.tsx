@@ -13,25 +13,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Fixed backslashes here since template literals can natively handle single/double quotes
-const text = `<h3>Practical Tools For Action</h3>
-<p>This is where you get the practical tools:</p>
-
-<ul class="tools-list list-disc pl-5 mt-2 space-y-1">
-  <li>
-    <strong>The 5-Minute Rule:</strong> 
-    How to trick your brain into starting an overwhelming task without triggering anxiety.
-  </li>
-  <li>
-    <strong>The Priority Filter:</strong> 
-    Exactly how to choose the one task that moves your business or skill forward today, solving the <em>"I don't know where to start"</em> problem.
-  </li>
-  <li>
-    <strong>The Studentpreneur Shield:</strong> 
-    My personal time-management routine for balancing heavy academic workloads with creative freedom.
-  </li>
-</ul>`;
-
 const Fix = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -39,26 +20,33 @@ const Fix = () => {
   const rightColRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
-  const painPoints = [
+  const firstLayout = [
     {
-      stage: "The Mindset Reset",
-      text: "Before we talk about calendars or schedules, we have to clear the mental noise. We will tear down the fear of failure and the perfectionism that keeps you frozen at Stage Zero. I will show you how to accept messy first steps so you can actually start.",
-      badge: "Step 01",
+      stage: "The Simple Math of ₦1,000,000",
+      text: "How to package your offer so hitting one million is as simple as getting 5, 10, or 20 clients.",
+      badge: "01",
     },
     {
-      stage: "The Real-Life Reality Check",
-      text: "No polished social media lies here. I am going to show you the exact behind-the-scenes chaos of how I manage my own university coursework while running creative businesses, handling clients, and keeping my sanity intact. You will see the messy side of building a brand from a dorm room.",
-      badge: "Step 02",
+      stage: "How to Stop Begging for Clients",
+      text: "Simple ways to present yourself so clients respect your time and pay you without long arguments.",
+      badge: "02",
     },
     {
-      stage: "The 3-Part Xecution System",
-      text,
-      badge: "Step 03",
+      stage: "The Steady Client Stream",
+      text: "How to set up a basic routine that brings in paying clients every week, even while you are busy in school or handling other tasks.",
+      badge: "03",
+    },
+  ];
+  const secondLayout = [
+    {
+      stage: "How I Build from My Room",
+      text: "The honest truth of how I balance client work and business while studying at the University of Ibadan.",
+      badge: "04",
     },
     {
-      stage: "Raw, Unfiltered Q&A",
-      text: "This is a conversation, not a broadcast. You can ask your most private, difficult questions about consistency, business confusion, or self-doubt. No judgment, no generic advice—just honest truths and direct solutions.",
-      badge: "Step 04",
+      stage: "Live Question & Answer",
+      text: "Bring your business problems, your pricing fears, and your failed offers. We will fix them together live on the call.",
+      badge: "05",
     },
   ];
 
@@ -125,7 +113,7 @@ const Fix = () => {
   return (
     <section
       ref={sectionRef}
-      id="the-fix"
+      id="the-breakdown"
       className="w-10/12 mx-auto relative py-20 overflow-hidden"
     >
       <div className="absolute -bottom-24 left-10 w-[350px] h-[350px] rounded-full bg-indigo-500/5 blur-3xl pointer-events-none" />
@@ -134,24 +122,48 @@ const Fix = () => {
         <div ref={headerRef} className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-primary-yellow">
             <AlertCircle className="h-3.5 w-3.5" />
-            <span className="font-semibold">The fix?</span>
+            <span className="font-semibold">The Break-down</span>
           </div>
           <p className="text-sm text-white/50 font-medium mb-8 border-l-2 border-primary-blue pl-4">
-            Because X-Deep is all about real conversations and zero fluff, we
-            are structuring this session to give you practical step-by-step
-            breakdowns, real-life examples, and deep mindset shifts. Here is
-            exactly how our time together will unfold:
+            We will look at the real, practical steps to make this money:
           </p>
         </div>
 
         <div
           ref={rightColRef}
-          className="lg:grid-cols-2 grid grid-cols-1 items-start gap-4"
+          className="lg:grid-cols-3 grid grid-cols-1 items-start gap-4"
         >
-          {painPoints.map((point) => (
+          {firstLayout.map((point) => (
             <div
               key={point.stage}
-              className="group relative rounded-xl border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]"
+              className="group relative h-32 rounded-xl border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-display font-bold text-white text-base group-hover:text-indigo-300 transition-colors">
+                  {point.stage}
+                </h3>
+                <span className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+                  {point.badge}
+                </span>
+              </div>
+
+              {/* FIXED DOWN HERE: Uses dangerouslySetInnerHTML to parse the HTML string markup */}
+              <div
+                className="text-xs text-gray-400 leading-relaxed space-y-2 [&>h3]:text-white [&>h3]:font-bold [&>h3]:my-2 [&>ul]:list-disc [&>ul]:pl-4"
+                dangerouslySetInnerHTML={{ __html: point.text }}
+              />
+            </div>
+          ))}
+        </div>
+        {/* second layout */}
+        <div
+          ref={rightColRef}
+          className="lg:grid-cols-3 grid grid-cols-1 mt-4 items-start gap-4"
+        >
+          {secondLayout.map((point, index) => (
+            <div
+              key={point.stage}
+              className={`group relative ${index === 0 ? "col-span-2" : "col-span-1"} h-32 rounded-xl border border-white/5 bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]`}
             >
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-display font-bold text-white text-base group-hover:text-indigo-300 transition-colors">

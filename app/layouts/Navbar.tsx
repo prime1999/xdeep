@@ -6,8 +6,8 @@ import RegisterLink from "@/components/RegisterLink";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-3 left-0 right-0 z-50">
-      <div className="w-10/12 md:w-9/12 rounded-[16px] mx-auto h-14 px-4 backdrop-blur-3xl border-b border-white/[0.06] flex items-center justify-between">
+    <nav className="fixed top-3 left-0 right-0 z-90">
+      <div className="w-11/12 md:w-9/12 rounded-[16px] mx-auto h-14 px-4 backdrop-blur-3xl border-b border-white/[0.06] flex items-center justify-between">
         <Image
           src={logo}
           width={80}
@@ -28,20 +28,20 @@ const Navbar = () => {
           <ul className="hidden md:flex gap-8 text-xs font-heading text-gray-400">
             <li className="cursor-pointer hover:text-white transition-colors">
               <a
-                href="#the-reality"
+                href="#the-struggle"
                 className="text-white/[0.8] hover:text-white transition-colors"
               >
                 {" "}
-                The Reality
+                The Struggle
               </a>
             </li>
             <li className="cursor-pointer hover:text-white transition-colors">
               <a
-                href="#the-fix"
+                href="#the-breakdown"
                 className="text-white/[0.8] hover:text-white transition-colors"
               >
                 {" "}
-                The Fix
+                Break down
               </a>
             </li>
             <li className="cursor-pointer hover:text-white transition-colors">

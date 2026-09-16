@@ -1,5 +1,5 @@
 // layouts-imports
-import About from "./layouts/About";
+import Struggle from "./layouts/Struggle";
 import Audience from "./layouts/Audience";
 import Fix from "./layouts/Fix";
 import Footer from "./layouts/Footer";
@@ -13,7 +13,7 @@ const page = () => {
     <main className="relative text-white min-h-screen">
       <Navbar />
       <Hero />
-      <About />
+      <Struggle />
       <Fix />
       <Audience />
       <Speaker />
