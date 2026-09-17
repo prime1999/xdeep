@@ -260,7 +260,7 @@ export default function RegistrationForm() {
 
       setLoadingStage("saving");
 
-      const response = await fetch("/api/xdeep/register", {
+      const response = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -318,9 +318,6 @@ My name is ${form.firstName} ${form.surname}.`,
         "_blank",
         "noopener,noreferrer",
       );
-
-      // Redirect after successful registration
-      router.push("/protected");
     } catch (error) {
       console.error("Unable to save profile:", error);
 
@@ -368,7 +365,7 @@ My name is ${form.firstName} ${form.surname}.`,
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div>
             <TextField
               label="Where is the best place to send you our letters? (Your email) *"
               placeholder="example@email.com"
