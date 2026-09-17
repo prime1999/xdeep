@@ -13,7 +13,8 @@ import RegisterLink from "@/components/RegisterLink";
 // layout component imports
 import Navbar from "./Navbar";
 // images imports
-import smoke from "@/public/images/smoke.png";
+import hero from "@/public/images/hero.png";
+import sign from "@/public/images/sign.png";
 
 const Hero = () => {
   // Animation Container References
@@ -104,13 +105,21 @@ const Hero = () => {
     <main
       ref={containerRef}
       className="w-full flex items-center justify-center flex-col gap-2 min-h-[90vh] relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${hero.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       {/* Background glow matrix to fit the Uprix dark aesthetic */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-black rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent to-[#020617]" />
-      <div className="absolute -bottom-10 opacity-30">
+      {/* <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-black rounded-full blur-[130px] pointer-events-none" /> */}
+      <div className="absolute inset-x-0 bottom-0 z-10 h-64 bg-gradient-to-b from-transparent to-[#030217] pointer-events-none" />
+      {/* <div className="absolute -bottom-10 opacity-30">
         <Image src={smoke} alt="Smoke" width={1500} height={1500} />
-      </div>
+      </div> */}
+      {/* <div className="absolute top-20 right-60">
+        <Image src={sign} alt="Sign" width={200} height={200} />
+      </div> */}
       {/* <h1 className="absolute top-3 text-[400px] text-gray-900 uppercase font-bold">
         third
       </h1> */}
@@ -142,13 +151,11 @@ const Hero = () => {
       <div className="w-full flex items-center justify-center text-center flex-col px-4 mt-4 relative z-40">
         {/* Core Main Title */}
 
-        <h4 className="text-xl md:text-4xl font-bold text-primary-yellow">
-          Making Your First
-        </h4>
-        <h1 className="flex flex-col items-center justify-center gap-2 mt-4 text-4xl text-white font-extrabold font-deep tracking-tight">
+        <h4 className="text-xl md:text-4xl font-bold">Making Your First</h4>
+        <h1 className="flex flex-col items-center justify-center gap-2 mt-4 text-4xl text-primary-yellow font-extrabold font-deep tracking-tight">
           {" "}
           ₦1,000,000
-          <span className="text-5xl ml-1 font-normal text-primary-blue font-heading">
+          <span className="text-5xl ml-1 font-normal font-heading text-white">
             in Any Business.
           </span>
         </h1>
@@ -156,7 +163,7 @@ const Hero = () => {
         {/* Narrative Description Block */}
         <p
           ref={subtextRef}
-          className="w-9/12 lg:w-5/12 font-sans text-center text-sm/relaxed mt-5 text-gray-300"
+          className="w-9/12 lg:w-6/12 font-sans text-center text-sm/relaxed mt-3 text-gray-300"
         >
           No empty motivational talk. No big English words here. Just the
           practical, step-by-step steps you need to take your business from zero

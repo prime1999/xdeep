@@ -58,7 +58,6 @@ const Navbar = () => {
                 href="#speaker"
                 className="text-white/[0.8] hover:text-white transition-colors"
               >
-                {" "}
                 Speaker
               </a>
             </li>
