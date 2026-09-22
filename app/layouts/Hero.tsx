@@ -126,7 +126,7 @@ const Hero = () => {
       {/* Brand Identity Display Header */}
       <div
         ref={logoRef}
-        className="mt-16 flex flex-col items-center gap-1 text-white/[0.8] z-50"
+        className="mt-4 flex flex-col items-center gap-1 text-white/[0.8] z-50"
       >
         <span className="flex items-end select-none">
           <p className="font-deep text-6xl text-white">x</p>
@@ -155,7 +155,7 @@ const Hero = () => {
         <h1 className="flex flex-col items-center justify-center gap-2 mt-4 text-4xl text-primary-yellow font-extrabold font-deep tracking-tight">
           {" "}
           ₦1,000,000
-          <span className="text-5xl ml-1 font-normal font-heading text-white">
+          <span className="text-5xl ml-1 font-normal font-heading text-white tracking-tighter">
             in Any Business.
           </span>
         </h1>
@@ -163,7 +163,7 @@ const Hero = () => {
         {/* Narrative Description Block */}
         <p
           ref={subtextRef}
-          className="w-9/12 lg:w-6/12 font-sans text-center text-sm/relaxed mt-3 text-gray-300"
+          className="w-9/12 lg:w-6/12 font-sans text-center text-sm/[14px] mt-3 text-gray-300"
         >
           No empty motivational talk. No big English words here. Just the
           practical, step-by-step steps you need to take your business from zero
@@ -171,7 +171,7 @@ const Hero = () => {
         </p>
 
         {/* Action Registration Button */}
-        <div ref={ctaRef} className="mt-6">
+        <div ref={ctaRef} className="mt-12">
           <RegisterLink source={"hero"} />
         </div>
 

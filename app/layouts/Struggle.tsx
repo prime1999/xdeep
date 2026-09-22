@@ -148,7 +148,7 @@ const Struggle = () => {
             return (
               <div
                 key={item.title}
-                className="relative w-56 h-56 rounded-[14px] p-5 flex flex-col justify-between overflow-hidden"
+                className="relative w-[330px] md:w-56 h-56 rounded-[14px] p-5 flex flex-col justify-between overflow-hidden"
                 style={{
                   background:
                     "linear-gradient(155deg, #07017b 0%, #07017b 60%, #07017b 100%)",

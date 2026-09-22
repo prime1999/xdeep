@@ -1,16 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useId } from "react";
 import { useRouter } from "next/navigation";
-import {
-  X,
-  ChevronDown,
-  Check,
-  User,
-  Target,
-  LoaderCircle,
-  Briefcase,
-} from "lucide-react";
+import { Check, User, Target, LoaderCircle, Briefcase } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type {
   CommitmentLevel,
@@ -125,86 +117,61 @@ function TextAreaField({
   );
 }
 
-/** Single-select dropdown styled like the "Приоритет / Статус" fields */
+/** Single-choice option list displayed with checkboxes. */
 function SelectField({
   label,
-  placeholder,
   options,
   value,
   onChange,
 }: {
   label: string;
-  placeholder: string;
   options: Option[];
   value?: string;
   onChange: (value: string) => void;
 }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
-        setOpen(false);
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
-
-  const selected = options.find((o) => o.value === value);
+  const fieldId = useId();
 
   return (
-    <div className="relative mb-4" ref={ref}>
+    <fieldset className="mb-4">
       <FieldLabel>{label}</FieldLabel>
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between text-left text-xs px-3.5 py-2.5 rounded-xl border border-neutral-200 bg-white/20 hover:border-neutral-300 transition"
-      >
-        <span
-          className={selected ? "text-white/70 font-medium" : "text-white/80"}
-        >
-          {selected ? selected.label : placeholder}
-        </span>
-        <span className="flex items-center gap-1.5 shrink-0">
-          {selected && (
-            <X
-              size={14}
-              className="text-neutral-400 hover:text-neutral-700"
-              onClick={(e) => {
-                e.stopPropagation();
-                onChange("");
-              }}
-            />
-          )}
-          <ChevronDown
-            size={15}
-            className={`text-neutral-400 transition-transform ${open ? "rotate-180" : ""}`}
-          />
-        </span>
-      </button>
+      <div className="space-y-2">
+        {options.map((opt) => {
+          const optionId = `${fieldId}-${opt.value}`;
+          const checked = value === opt.value;
 
-      {open && (
-        <div className="absolute z-30 mt-1.5 w-full bg-white rounded-xl shadow-xl max-h-56 overflow-auto py-1.5">
-          {options.map((opt) => (
-            <button
+          return (
+            <label
               key={opt.value}
-              type="button"
-              onClick={() => {
-                onChange(opt.value);
-                setOpen(false);
-              }}
-              className="w-full flex items-center justify-between px-3.5 py-2 text-sm text-left text-secondary-blue cursor-pointer transition"
+              htmlFor={optionId}
+              className={`flex items-start gap-3 rounded-xl border px-3.5 py-3 text-xs transition cursor-pointer ${
+                checked
+                  ? "border-primary-blue bg-primary-blue/20 text-white"
+                  : "border-neutral-200 bg-white/20 text-white/80 hover:border-neutral-300"
+              }`}
             >
-              {opt.label}
-              {value === opt.value && (
-                <Check size={14} className="text-secondary-blue" />
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+              <input
+                id={optionId}
+                type="checkbox"
+                checked={checked}
+                onChange={() => onChange(checked ? "" : opt.value)}
+                className="peer sr-only"
+              />
+              <span
+                aria-hidden="true"
+                className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition ${
+                  checked
+                    ? "border-primary-blue bg-primary-blue"
+                    : "border-white/50 bg-transparent"
+                }`}
+              >
+                {checked && <Check size={12} className="text-white" />}
+              </span>
+              <span>{opt.label}</span>
+            </label>
+          );
+        })}
+      </div>
+    </fieldset>
   );
 }
 
@@ -287,25 +254,6 @@ I'd like to register for September X-Deep where I'll learn how to take my busine
 My name is ${form.firstName} ${form.surname}.`,
       );
 
-      // If you're using your toast component, uncomment this section
-
-      //   toast({
-      //     title: "Profile created",
-      //     description:
-      //       "Welcome to Uprix. Your profile is complete. Have questions? Message Taifaq on WhatsApp.",
-      //     action: (
-      //       <a
-      //         href={`https://wa.me/2347025120945?text=${whatsappMessage}`}
-      //         target="_blank"
-      //         rel="noreferrer"
-      //         className="inline-flex h-8 items-center rounded-md bg-green-600 px-3 text-xs font-semibold text-white transition-colors hover:bg-green-700"
-      //       >
-      //         Message Taifaq on WhatsApp
-      //       </a>
-      //     ),
-      //     variant: "success",
-      //   });
-
       router.push(`https://wa.me/2347025120945?text=${whatsappMessage}`);
 
       setLoadingStage("complete");
@@ -340,7 +288,7 @@ My name is ${form.firstName} ${form.surname}.`,
   }[loadingStage];
 
   return (
-    <div className="min-h-screen w-full bg-transparent flex items-start justify-center py-10 px-4">
+    <div className="h-full w-full bg-transparent flex items-start justify-center pb-10 px-4">
       <div className="w-full">
         <form onSubmit={handleSubmit}>
           <SectionHeading
@@ -351,7 +299,7 @@ My name is ${form.firstName} ${form.surname}.`,
 
           <div className="grid md:grid-cols-2 gap-4">
             <TextField
-              label="Your beautiful first name? *"
+              label="Your beautiful first name?"
               placeholder="First name"
               value={form.firstName}
               onChange={(v) => setField("firstName", v)}
@@ -367,14 +315,14 @@ My name is ${form.firstName} ${form.surname}.`,
 
           <div>
             <TextField
-              label="Where is the best place to send you our letters? (Your email) *"
+              label="Where is the best place to send you our letters? (Your email)"
               placeholder="example@email.com"
               value={form.email}
               onChange={(v) => setField("email", v)}
             />
 
             <TextField
-              label="What is your active WhatsApp number so we can keep in touch? *"
+              label="What is your active WhatsApp number so we can keep in touch?"
               placeholder="+234..."
               value={form.whatsappNumber}
               onChange={(v) => setField("whatsappNumber", v)}
@@ -388,15 +336,14 @@ My name is ${form.firstName} ${form.surname}.`,
           />
 
           <TextAreaField
-            label="What business, product, or skill do you currently sell? *"
+            label="What business, product, or skill do you currently sell?"
             placeholder="Graphic design, web design, affiliate marketing..."
             value={form.businessDescription}
             onChange={(v) => setField("businessDescription", v)}
           />
 
           <SelectField
-            label="Which of these statements describes your sales right now? *"
-            placeholder="Select an option"
+            label="Which of these statements describes your sales right now?"
             options={SALES_STAGE_OPTIONS}
             value={form.salesStage}
             onChange={(v) => setField("salesStage", v as SalesStage)}
@@ -412,8 +359,7 @@ My name is ${form.firstName} ${form.surname}.`,
           )}
 
           <SelectField
-            label="What is the number one problem stopping you from making more money right now? *"
-            placeholder="Select an option"
+            label="What is the number one problem stopping you from making more money right now?"
             options={PRIMARY_CHALLENGE_OPTIONS}
             value={form.primaryChallenge}
             onChange={(v) =>
@@ -431,7 +377,7 @@ My name is ${form.firstName} ${form.surname}.`,
           )}
 
           <TextAreaField
-            label="What feels like the biggest wall between you and hitting ₦1,000,000? *"
+            label="What feels like the biggest wall between you and hitting ₦1,000,000?"
             placeholder="Lack of buyers, fear of putting yourself out there, no clear plan..."
             rows={4}
             value={form.challengeDetails}
@@ -439,7 +385,7 @@ My name is ${form.firstName} ${form.surname}.`,
           />
 
           <TextAreaField
-            label="If you could ask Taifaq ONE question, what would it be? *"
+            label="If you could ask Taifaq ONE question, what would it be?"
             placeholder="Your question..."
             rows={4}
             value={form.taifaqQuestion}
@@ -454,23 +400,26 @@ My name is ${form.firstName} ${form.surname}.`,
           />
 
           <SelectField
-            label="Are you ready to show up, take notes and apply what you learn? *"
-            placeholder="Select an option"
+            label="Are you ready to show up, take notes and apply what you learn?"
             options={COMMITMENT_OPTIONS}
             value={form.commitmentLevel}
             onChange={(v) => setField("commitmentLevel", v as CommitmentLevel)}
           />
 
           <TextField
-            label="Referral Code (Optional)"
+            label={`Did anyone tell you about this X-Deep? If yes, Input their code below.👇🏾
+(Eg 001, 002)
+
+Type "None" if nobody told you about`}
             placeholder="001, 002 or None"
             value={form.referralCode}
             onChange={(v) => setField("referralCode", v)}
           />
 
-          <p className="text-xs text-white/80 leading-relaxed">
-            This isn't a referral contest. At Uprix, we appreciate people who
-            help others discover opportunities like X-Deep.
+          <p className="text-[10px] text-white/80 leading-relaxed">
+            Note: This is not a referral contest. At Uprix, we appreciate and
+            value those who are passionate about helping others grow by telling
+            more people about X-Deep through little rewards.
           </p>
 
           <div className="mt-6 border-t border-neutral-100 pt-4">
