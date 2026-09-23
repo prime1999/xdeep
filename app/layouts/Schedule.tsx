@@ -16,7 +16,7 @@ const Schedule = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const telegramRef = useRef<HTMLDivElement>(null);
 
-  const targetDate = new Date("2026-09-28T20:00:00+01:00");
+  const targetDate = new Date("2026-09-30T20:00:00+01:00");
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
